@@ -5,6 +5,7 @@ import it.finki.tinki.model.Jobs.Internship;
 import it.finki.tinki.model.Jobs.Job;
 import it.finki.tinki.model.Jobs.Work;
 import it.finki.tinki.model.Skill;
+import it.finki.tinki.repository.JobRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 public class TestController {
+
+    JobRepository jobRepository;
+
+    public TestController(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
     @GetMapping
     public String testPage(){
