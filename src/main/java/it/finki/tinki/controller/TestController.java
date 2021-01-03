@@ -34,7 +34,6 @@ public class TestController {
 
         List<Skill> user = new ArrayList<>();
 
-        //user.add(new Skill("C++"));
         user.add(new Skill("Java"));
         user.add(new Skill("Python"));
 
