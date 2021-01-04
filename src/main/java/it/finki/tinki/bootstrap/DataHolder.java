@@ -1,18 +1,32 @@
 package it.finki.tinki.bootstrap;
 
+import it.finki.tinki.model.Address;
 import it.finki.tinki.model.Skill;
-import it.finki.tinki.repository.SkillRepository;
+import it.finki.tinki.model.Users.Company;
+import it.finki.tinki.model.Users.User;
+import it.finki.tinki.model.enumerator.AccountType;
+import it.finki.tinki.repository.*;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DataHolder {
 
     SkillRepository skillRepository;
+    UserRepository userRepository;
+    CompanyRepository companyRepository;
+    TeamRepository teamRepository;
+    AddressRepository addressRepository;
 
-    public DataHolder(SkillRepository skillRepository) {
+    public DataHolder(SkillRepository skillRepository, UserRepository userRepository, CompanyRepository companyRepository, TeamRepository teamRepository, AddressRepository addressRepository) {
         this.skillRepository = skillRepository;
+        this.userRepository = userRepository;
+        this.companyRepository = companyRepository;
+        this.teamRepository = teamRepository;
+        this.addressRepository = addressRepository;
     }
 
     @PostConstruct
@@ -40,6 +54,9 @@ public class DataHolder {
             skillRepository.save(s9);
             skillRepository.save(s0);
         }
+
+        addressRepository.save(new Address("asdf", "asdf", "asdf"));
+        companyRepository.save(new Company("asdf@asdf", "pass", "Co.co", AccountType.COMPANY, addressRepository.findAll().get(0)));
     }
 
 }

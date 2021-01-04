@@ -14,7 +14,9 @@ public abstract class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @Column(unique = true)
     String email;
+
     String password;
 
     String name;

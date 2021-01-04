@@ -1,45 +1,34 @@
 package it.finki.tinki.controller;
 
-import it.finki.tinki.helper.Matchmaker;
-import it.finki.tinki.model.Jobs.Internship;
-import it.finki.tinki.model.Jobs.Job;
-import it.finki.tinki.model.Jobs.Work;
-import it.finki.tinki.model.Skill;
+import it.finki.tinki.model.Users.Account;
+import it.finki.tinki.model.Users.Company;
+import it.finki.tinki.model.Users.Team;
+import it.finki.tinki.model.Users.User;
+import it.finki.tinki.model.enumerator.AccountType;
+import it.finki.tinki.model.pojo.AccountLoginDataPojo;
+import it.finki.tinki.repository.CompanyRepository;
 import it.finki.tinki.repository.JobRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import it.finki.tinki.repository.TeamRepository;
+import it.finki.tinki.repository.UserRepository;
+import it.finki.tinki.service.AccountService;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class TestController {
 
-    JobRepository jobRepository;
+    AccountService accountService;
 
-    public TestController(JobRepository jobRepository) {
-        this.jobRepository = jobRepository;
+    public TestController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
-    @GetMapping
-    public String testPage(){
-        Matchmaker match = new Matchmaker();
-        List<Skill> skills = new ArrayList<>();
-
-        skills.add(new Skill("C++"));
-        skills.add(new Skill("Java"));
-        skills.add(new Skill("Python"));
-
-        List<Skill> user = new ArrayList<>();
-
-        user.add(new Skill("Java"));
-        user.add(new Skill("Python"));
-
-        System.out.println(match.match(skills, user));
-
-        return "Hello";
+    @PostMapping(path = "/login")
+    public Account testPage(@RequestBody AccountLoginDataPojo body){
+        return accountService.findUser(body.getAccount(), body.getPassword(), body.getType());
     }
 
 }
