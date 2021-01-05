@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class TestController {
 
@@ -19,6 +20,9 @@ public class TestController {
 
     @PostMapping(path = "/login")
     public AuthResponseDataPojo testPage(@RequestBody AccountLoginDataPojo body) throws ResponseStatusException {
+
+        System.out.println(body);
+
         Account a1 = accountService.findUser(body.getAccount(), body.getPassword(), body.getType());
         AuthResponseDataPojo resp = new AuthResponseDataPojo();
 
