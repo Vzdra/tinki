@@ -79,4 +79,20 @@ public class AccountServiceImpl implements AccountService {
         Team t = new Team(email, password, name, AccountType.TEAM, members);
         return this.teamRepository.save(t);
     }
+
+    public Account registerCompany(String email, String password, String name, String country, String city, String street){
+        if(email==null || email.isEmpty() || password==null || password.isEmpty() || name==null || name.isEmpty()
+                || country==null || country.isEmpty() || city==null || city.isEmpty() || street==null || street.isEmpty()){
+            throw new InvalidArgumentsException();
+        }
+
+        if(this.companyRepository.findByEmail(email).isPresent()){
+            throw new UserExistsException();
+        }
+
+        Address a = new Address(country, city, street);
+        this.addressRepository.save(a);
+        Company c = new Company(email, password, name, AccountType.COMPANY, a);
+        return this.companyRepository.save(c);
+    }
 }
