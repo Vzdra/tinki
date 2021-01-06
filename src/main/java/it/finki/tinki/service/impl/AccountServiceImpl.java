@@ -66,4 +66,17 @@ public class AccountServiceImpl implements AccountService {
         User u = new User(email, password, name, AccountType.USER, surname, retainedSkills, skillsToLearn);
         return this.userRepository.save(u);
     }
+
+    public Account registerTeam(String email, String password, String name, int members){
+        if(email==null || email.isEmpty() || password==null || password.isEmpty() || name==null || name.isEmpty()){
+            throw new InvalidArgumentsException();
+        }
+
+        if(this.teamRepository.findByEmail(email).isPresent()){
+            throw new UserExistsException();
+        }
+
+        Team t = new Team(email, password, name, AccountType.TEAM, members);
+        return this.teamRepository.save(t);
+    }
 }
