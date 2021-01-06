@@ -10,11 +10,11 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
-public class TestController {
+public class LoginController {
 
     AccountService accountService;
 
-    public TestController(AccountService accountService) {
+    public LoginController(AccountService accountService) {
         this.accountService = accountService;
     }
 

@@ -2,7 +2,7 @@ import axios from '../custom_axios/axios';
 
 const UserRegister = {
     userRegister: (email ,password ,name , surname, skillsRetained, skillsToLearn) => {
-        return axios.post("/user/register", {
+        return axios.post("/register/user", {
             "email": email,
             "password": password,
             "name": name,
@@ -13,14 +13,14 @@ const UserRegister = {
         });
     },
     teamRegister:(email ,password,name) => {
-        return axios.post("/team/register",{
+        return axios.post("/register/team",{
             "email": email,
             "password": password,
             "name": name
         });
     },
     companyRegister:(email ,password,name, country ,city, street) => {
-        return axios.post("/company/register",{
+        return axios.post("/register/company",{
             "email": email,
             "password": password,
             "name": name,
