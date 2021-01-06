@@ -50,5 +50,43 @@ public class RegisterController {
         return response;
     }
 
+    @RequestMapping(path = "/team", method = RequestMethod.POST)
+    private Map<String, String> registerTeam(@RequestParam String email,
+                                             @RequestParam String password,
+                                             @RequestParam String name,
+                                             @RequestParam int members){
 
+        Account k = this.accountService.registerTeam(email, password, name, members);
+
+        Map<String, String> response = new HashMap<>();
+
+        if(k!=null){
+            response.put("error", "There was an error when trying to register team.");
+        }else{
+            response.put("success", "Registration completed successfully.");
+        }
+
+        return response;
+    }
+
+    @RequestMapping(path = "/company", method = RequestMethod.POST)
+    private Map<String, String> registerTeam(@RequestParam String email,
+                                             @RequestParam String password,
+                                             @RequestParam String name,
+                                             @RequestParam String country,
+                                             @RequestParam String city,
+                                             @RequestParam String street){
+
+        Account k = this.accountService.registerCompany(email, password, name, country, city, street);
+
+        Map<String, String> response = new HashMap<>();
+
+        if(k!=null){
+            response.put("error", "There was an error when trying to register company.");
+        }else{
+            response.put("success", "Registration completed successfully.");
+        }
+
+        return response;
+    }
 }
