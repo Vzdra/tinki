@@ -39,15 +39,15 @@ public class AccountServiceImpl implements AccountService {
     public Account findUser(String email, String password, AccountType type) {
 
         if(type.equals(AccountType.USER)){
-            User u1 = userRepository.findByEmailAndPassword(email, password);
+            User u1 = this.userRepository.findByEmailAndPassword(email, password);
             return u1;
         }
         else if(type.equals(AccountType.TEAM)){
-            Team t1 = teamRepository.findByEmailAndPassword(email, password);
+            Team t1 = this.teamRepository.findByEmailAndPassword(email, password);
             return t1;
         }
         else if(type.equals(AccountType.COMPANY)){
-            Company c1 = companyRepository.findByEmailAndPassword(email, password);
+            Company c1 = this.companyRepository.findByEmailAndPassword(email, password);
             return c1;
         }
 
