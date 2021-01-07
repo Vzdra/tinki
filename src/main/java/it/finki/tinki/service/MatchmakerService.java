@@ -11,4 +11,7 @@ public interface MatchmakerService {
     List<Internship> getMatchingInternshipsForUser(User user);
     List<Job> getMatchingJobsForUser(User user);
     List<Project> getMatchingProjectsForUser(User user);
+    void setUpUserJobMatches(Job job, User user);
+    void setUpUserProjectMatches(Project project, User user);
+    void setUpUserInternshipMatches(Internship internship, User user);
 }

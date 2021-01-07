@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
-    List<Match> getAllByCombinedId_UserAndTypeOrderByCoefficientDesc(User user, WorkType type);
+    List<Match> getAllByCombinedId_User_IdAndTypeOrderByCoefficientDesc(Long uId, WorkType type);
 }

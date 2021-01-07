@@ -95,4 +95,17 @@ public class AccountServiceImpl implements AccountService {
         Company c = new Company(email, password, name, AccountType.COMPANY, a);
         return this.companyRepository.save(c);
     }
+
+    public Account findByIdAndType(Long id, AccountType type){
+        switch (type){
+            case COMPANY:
+                return this.companyRepository.findById(id).get();
+            case TEAM:
+                return this.teamRepository.findById(id).get();
+            case USER:
+                return this.userRepository.findById(id).get();
+        }
+
+        return null;
+    }
 }

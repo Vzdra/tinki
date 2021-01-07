@@ -55,6 +55,11 @@ public class DataHolder {
             skillRepository.save(s0);
         }
 
+        List<Skill> lista;
+        lista = skillRepository.findAll();
+
+        userRepository.save(new User("asdf", "asdf", "Zoki", AccountType.USER, "Poki", lista, lista));
+
         addressRepository.save(new Address("asdf", "asdf", "asdf"));
         companyRepository.save(new Company("asdf@asdf", "pass", "Co.co", AccountType.COMPANY, addressRepository.findAll().get(0)));
     }

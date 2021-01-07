@@ -18,7 +18,8 @@ public class Match {
 
     public Match(){}
 
-    public Match(float coefficient, WorkType type) {
+    public Match(EmbeddedMatchId embeddedMatchId, float coefficient, WorkType type) {
+        this.combinedId = embeddedMatchId;
         this.coefficient = coefficient;
         this.type = type;
     }

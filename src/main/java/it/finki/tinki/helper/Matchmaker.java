@@ -1,11 +1,14 @@
 package it.finki.tinki.helper;
 
 import it.finki.tinki.model.Skill;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class Matchmaker {
 
-    public float match(List<Skill> work, List<Skill> user){
+    public static float match(List<Skill> work, List<Skill> user){
 
         float coef = work.size();
         float k = 0;

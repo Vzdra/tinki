@@ -17,4 +17,12 @@ public class EmbeddedMatchId implements Serializable {
 
     @OneToOne
     private User user;
+
+    public EmbeddedMatchId(){ }
+
+    public EmbeddedMatchId(Work work, User user){
+        this.work = work;
+        this.user = user;
+    }
+
 }
