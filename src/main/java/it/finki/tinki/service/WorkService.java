@@ -15,7 +15,7 @@ public interface WorkService {
     List<Job> getAllJobs();
     List<Internship> getAllInternships();
     List<Project> getAllProjects();
-    Job insertJob(String title, String description, Long accId, int salary, List<Integer> skillsRequired, AccountType type);
-    Internship insertInternship(String title, String description, Long adccId, int salary, List<Integer> skillsTrained, int openSpots, AccountType type);
-    Project insertProject(String title, String description, Long adccId, int salary, List<Integer> skillsRequired, Date validUntil, AccountType type);
+    Job insertJob(String title, String description, Long accId, int salary, List<Long> skillsRequired, AccountType type);
+    Internship insertInternship(String title, String description, Long adccId, int salary, List<Long> skillsTrained, int openSpots, AccountType type);
+    Project insertProject(String title, String description, Long adccId, int salary, List<Long> skillsRequired, Date validUntil, AccountType type);
 }

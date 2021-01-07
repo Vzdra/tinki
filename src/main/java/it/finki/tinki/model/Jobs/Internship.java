@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Internship extends Work {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<Skill> skillsTrained;
 
     int openSpots;

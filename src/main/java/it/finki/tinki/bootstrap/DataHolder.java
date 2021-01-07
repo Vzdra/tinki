@@ -1,11 +1,20 @@
 package it.finki.tinki.bootstrap;
 
 import it.finki.tinki.model.Address;
+import it.finki.tinki.model.EmbeddedMatchId;
+import it.finki.tinki.model.Jobs.Job;
+import it.finki.tinki.model.Jobs.Work;
+import it.finki.tinki.model.Match;
 import it.finki.tinki.model.Skill;
+import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.Users.Company;
 import it.finki.tinki.model.Users.User;
 import it.finki.tinki.model.enumerator.AccountType;
+import it.finki.tinki.model.enumerator.WorkType;
 import it.finki.tinki.repository.*;
+import it.finki.tinki.service.AccountService;
+import it.finki.tinki.service.WorkService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -16,17 +25,18 @@ import java.util.List;
 public class DataHolder {
 
     SkillRepository skillRepository;
-    UserRepository userRepository;
-    CompanyRepository companyRepository;
-    TeamRepository teamRepository;
-    AddressRepository addressRepository;
+    AccountService accountService;
+    WorkService workService;
+    MatchRepository matchRepository;
 
-    public DataHolder(SkillRepository skillRepository, UserRepository userRepository, CompanyRepository companyRepository, TeamRepository teamRepository, AddressRepository addressRepository) {
+    public DataHolder(SkillRepository skillRepository,
+                      AccountService accountService,
+                      WorkService workService,
+                      MatchRepository matchRepository) {
         this.skillRepository = skillRepository;
-        this.userRepository = userRepository;
-        this.companyRepository = companyRepository;
-        this.teamRepository = teamRepository;
-        this.addressRepository = addressRepository;
+        this.accountService = accountService;
+        this.workService = workService;
+        this.matchRepository = matchRepository;
     }
 
     @PostConstruct
@@ -58,10 +68,17 @@ public class DataHolder {
         List<Skill> lista;
         lista = skillRepository.findAll();
 
-        userRepository.save(new User("asdf", "asdf", "Zoki", AccountType.USER, "Poki", lista, lista));
+        List<Long> ids = new ArrayList<>();
+        lista.forEach(item -> {
+            ids.add(item.getId());
+        });
 
-        addressRepository.save(new Address("asdf", "asdf", "asdf"));
-        companyRepository.save(new Company("asdf@asdf", "pass", "Co.co", AccountType.COMPANY, addressRepository.findAll().get(0)));
+        Account c = this.accountService.registerCompany("asdf@asdf", "pass", "Co.co", "Macedonia", "Skopje", "Pero Nakov");
+
+        Job j = this.workService.insertJob("Asdf", "Asdfa", c.getId() ,5000, ids, AccountType.COMPANY);
+
+        Account u = this.accountService.registerUser("asdf", "asdf", "Zoki", "Poki", lista, lista);
+
     }
 
 }

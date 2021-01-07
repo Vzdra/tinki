@@ -1,6 +1,9 @@
 package it.finki.tinki.service.impl;
 
 import it.finki.tinki.model.Address;
+import it.finki.tinki.model.Jobs.Internship;
+import it.finki.tinki.model.Jobs.Job;
+import it.finki.tinki.model.Jobs.Project;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.Users.Company;
@@ -9,11 +12,10 @@ import it.finki.tinki.model.Users.User;
 import it.finki.tinki.model.enumerator.AccountType;
 import it.finki.tinki.model.exception.InvalidArgumentsException;
 import it.finki.tinki.model.exception.UserExistsException;
-import it.finki.tinki.repository.AddressRepository;
-import it.finki.tinki.repository.CompanyRepository;
-import it.finki.tinki.repository.TeamRepository;
-import it.finki.tinki.repository.UserRepository;
+import it.finki.tinki.repository.*;
 import it.finki.tinki.service.AccountService;
+import it.finki.tinki.service.MatchmakerService;
+import it.finki.tinki.service.WorkService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -27,12 +29,27 @@ public class AccountServiceImpl implements AccountService {
     UserRepository userRepository;
     TeamRepository teamRepository;
     CompanyRepository companyRepository;
+    JobRepository jobRepository;
+    ProjectRepository projectRepository;
+    InternshipRepository internshipRepository;
+    MatchmakerService matchmakerService;
 
-    public AccountServiceImpl(AddressRepository addressRepository, UserRepository userRepository, TeamRepository teamRepository, CompanyRepository companyRepository) {
+    public AccountServiceImpl(AddressRepository addressRepository,
+                              UserRepository userRepository,
+                              TeamRepository teamRepository,
+                              CompanyRepository companyRepository,
+                              MatchmakerService matchmakerService,
+                              JobRepository jobRepository,
+                              ProjectRepository projectRepository,
+                              InternshipRepository internshipRepository) {
         this.addressRepository = addressRepository;
         this.userRepository = userRepository;
         this.teamRepository = teamRepository;
         this.companyRepository = companyRepository;
+        this.jobRepository = jobRepository;
+        this.projectRepository = projectRepository;
+        this.internshipRepository = internshipRepository;
+        this.matchmakerService = matchmakerService;
     }
 
     @Override
@@ -64,7 +81,31 @@ public class AccountServiceImpl implements AccountService {
         }
 
         User u = new User(email, password, name, AccountType.USER, surname, retainedSkills, skillsToLearn);
-        return this.userRepository.save(u);
+        User ru = this.userRepository.save(u);
+
+        List<Job> jobs = this.jobRepository.findAll();
+        List<Project> projects = this.projectRepository.findAll();
+        List<Internship> internships = this.internshipRepository.findAll();
+
+        if(jobs.size()!=0){
+            for (Job job : jobs) {
+                this.matchmakerService.setUpUserJobMatches(job, u);
+            }
+        }
+
+        if(projects.size()!=0){
+            for (Project project : projects) {
+                this.matchmakerService.setUpUserProjectMatches(project, u);
+            }
+        }
+
+        if(internships.size()!=0){
+            for(Internship internship : internships){
+                this.matchmakerService.setUpUserInternshipMatches(internship, u);
+            }
+        }
+
+        return ru;
     }
 
     public Account registerTeam(String email, String password, String name, int members){

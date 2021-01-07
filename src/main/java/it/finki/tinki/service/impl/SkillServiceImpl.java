@@ -19,12 +19,12 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public List<Skill> returnSkillsBasedOnId(List<Integer> skillIds) {
+    public List<Skill> returnSkillsBasedOnId(List<Long> skillIds) {
 
         List<Skill> list = new ArrayList<>();
 
         skillIds.forEach(skill -> {
-            this.skillRepository.findById(Long.valueOf(skill)).ifPresent(list::add);
+            this.skillRepository.findById(skill).ifPresent(list::add);
         });
 
         return list;

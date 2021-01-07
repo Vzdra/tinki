@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class Project extends Work {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<Skill> skillsRequired;
 
     Date validUntil;

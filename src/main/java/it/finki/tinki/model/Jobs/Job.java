@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Job extends Work {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<Skill> skillsRequired;
 
     public Job(){}

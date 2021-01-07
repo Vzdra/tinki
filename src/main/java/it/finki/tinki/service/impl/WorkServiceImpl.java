@@ -76,7 +76,7 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public Job insertJob(String title, String description, Long adccId, int salary, List<Integer> skillsRequired, AccountType type) {
+    public Job insertJob(String title, String description, Long adccId, int salary, List<Long> skillsRequired, AccountType type) {
         List<Skill> skills = this.skillService.returnSkillsBasedOnId(skillsRequired);
         Account account = this.accountService.findByIdAndType(adccId, type);
         Job j = new Job(title, description, account, salary, skills);
@@ -84,7 +84,7 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public Internship insertInternship(String title, String description, Long adccId, int salary, List<Integer> skillsTrained, int openSpots, AccountType type) {
+    public Internship insertInternship(String title, String description, Long adccId, int salary, List<Long> skillsTrained, int openSpots, AccountType type) {
         List<Skill> skills = this.skillService.returnSkillsBasedOnId(skillsTrained);
         Account account = this.accountService.findByIdAndType(adccId, type);
         Internship j = new Internship(title, description, account, salary, skills, openSpots);
@@ -92,7 +92,7 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public Project insertProject(String title, String description, Long adccId, int salary, List<Integer> skillsRequired, Date validUntil, AccountType type) {
+    public Project insertProject(String title, String description, Long adccId, int salary, List<Long> skillsRequired, Date validUntil, AccountType type) {
         List<Skill> skills = this.skillService.returnSkillsBasedOnId(skillsRequired);
         Account account = this.accountService.findByIdAndType(adccId, type);
         Project j = new Project(title, description, account, salary, skills, validUntil);

@@ -10,7 +10,10 @@ import it.finki.tinki.model.Match;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.User;
 import it.finki.tinki.model.enumerator.WorkType;
+import it.finki.tinki.repository.InternshipRepository;
+import it.finki.tinki.repository.JobRepository;
 import it.finki.tinki.repository.MatchRepository;
+import it.finki.tinki.repository.ProjectRepository;
 import it.finki.tinki.service.MatchmakerService;
 import org.springframework.stereotype.Service;
 
@@ -22,18 +25,29 @@ import java.util.List;
 public class MatchmakerServiceImpl implements MatchmakerService {
 
     MatchRepository matchRepository;
+    JobRepository jobRepository;
+    InternshipRepository internshipRepository;
+    ProjectRepository projectRepository;
 
-    public MatchmakerServiceImpl(MatchRepository matchRepository) {
+    public MatchmakerServiceImpl(MatchRepository matchRepository,
+                                 JobRepository jobRepository,
+                                 InternshipRepository internshipRepository,
+                                 ProjectRepository projectRepository) {
         this.matchRepository = matchRepository;
+        this.jobRepository = jobRepository;
+        this.internshipRepository = internshipRepository;
+        this.projectRepository = projectRepository;
     }
 
     @Override
     public List<Internship> getMatchingInternshipsForUser(User user) {
-        List<Match> matches = this.matchRepository.getAllByCombinedId_User_IdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
+        List<Match> matches = this.matchRepository.getAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
+//        List<Match> matches = this.matchRepository.getAllByUserIdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
 
         List<Internship> internships = new ArrayList<>();
         matches.forEach(match -> {
-            internships.add((Internship) match.getCombinedId().getWork());
+            internships.add((Internship) match.getEmbeddedMatchId().getWork());
+//            internships.add(this.internshipRepository.findById(match.getWorkId()).get());
         });
 
         return internships;
@@ -41,11 +55,13 @@ public class MatchmakerServiceImpl implements MatchmakerService {
 
     @Override
     public List<Job> getMatchingJobsForUser(User user) {
-        List<Match> matches = this.matchRepository.getAllByCombinedId_User_IdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.JOB);
+        List<Match> matches = this.matchRepository.getAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
+//        List<Match> matches = this.matchRepository.getAllByUserIdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.JOB);
 
         List<Job> jobs = new ArrayList<>();
         matches.forEach(match -> {
-            jobs.add((Job) match.getCombinedId().getWork());
+            jobs.add((Job) match.getEmbeddedMatchId().getWork());
+//            jobs.add(this.jobRepository.findById(match.getWorkId()).get());
         });
 
         return jobs;
@@ -53,11 +69,13 @@ public class MatchmakerServiceImpl implements MatchmakerService {
 
     @Override
     public List<Project> getMatchingProjectsForUser(User user) {
-        List<Match> matches = this.matchRepository.getAllByCombinedId_User_IdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.PROJECT);
+        List<Match> matches = this.matchRepository.getAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
+//        List<Match> matches = this.matchRepository.getAllByUserIdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.PROJECT);
 
         List<Project> projects = new ArrayList<>();
         matches.forEach(match -> {
-            projects.add((Project) match.getCombinedId().getWork());
+            projects.add((Project) match.getEmbeddedMatchId().getWork());
+//            projects.add(this.projectRepository.findById(match.getWorkId()).get());
         });
 
         return projects;
@@ -71,8 +89,9 @@ public class MatchmakerServiceImpl implements MatchmakerService {
         float coef = Matchmaker.match(jobSkill, userSkill);
 
         if(coef!=0){
-            EmbeddedMatchId matchId = new EmbeddedMatchId(job, user);
-            Match m = new Match(matchId, coef, WorkType.JOB);
+            EmbeddedMatchId embeddedMatchId = new EmbeddedMatchId(job, user);
+            Match m = new Match(embeddedMatchId, coef, WorkType.JOB);
+//            Match m = new Match(job.getId(), user.getId(), coef, WorkType.JOB);
             this.matchRepository.save(m);
         }
     }
@@ -85,8 +104,9 @@ public class MatchmakerServiceImpl implements MatchmakerService {
         float coef = Matchmaker.match(projectSkills, userSkill);
 
         if(coef!=0){
-            EmbeddedMatchId matchId = new EmbeddedMatchId(project, user);
-            Match m = new Match(matchId, coef, WorkType.PROJECT);
+            EmbeddedMatchId embeddedMatchId = new EmbeddedMatchId(project, user);
+            Match m = new Match(embeddedMatchId, coef, WorkType.PROJECT);
+//            Match m = new Match(project.getId(), user.getId(), coef, WorkType.JOB);
             this.matchRepository.save(m);
         }
     }
@@ -99,8 +119,9 @@ public class MatchmakerServiceImpl implements MatchmakerService {
         float coef = Matchmaker.match(internshipSkills, userSkill);
 
         if(coef!=0){
-            EmbeddedMatchId matchId = new EmbeddedMatchId(internship, user);
-            Match m = new Match(matchId, coef, WorkType.INTERNSHIP);
+            EmbeddedMatchId embeddedMatchId = new EmbeddedMatchId(internship, user);
+            Match m = new Match(embeddedMatchId, coef, WorkType.PROJECT);
+//            Match m = new Match(internship.getId(), user.getId(), coef, WorkType.JOB);
             this.matchRepository.save(m);
         }
     }

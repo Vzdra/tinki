@@ -39,8 +39,8 @@ public class RegisterController {
                                              @RequestParam String password,
                                              @RequestParam String name,
                                              @RequestParam String surname,
-                                             @RequestParam List<Integer> retainedSkills,
-                                             @RequestParam List<Integer> skillsToLearn){
+                                             @RequestParam List<Long> retainedSkills,
+                                             @RequestParam List<Long> skillsToLearn){
 
         List<Skill> retained = this.skillService.returnSkillsBasedOnId(retainedSkills);
         List<Skill> toLearn = this.skillService.returnSkillsBasedOnId(skillsToLearn);
@@ -52,22 +52,6 @@ public class RegisterController {
         if(k==null){
             response.put("error", "There was an error when trying to register user.");
         }else{
-            List<Job> jobs = this.workService.getAllJobs();
-            List<Project> projects = this.workService.getAllProjects();
-            List<Internship> internships = this.workService.getAllInternships();
-
-            jobs.forEach(job -> {
-                this.matchmakerService.setUpUserJobMatches(job, (User) k);
-            });
-
-            projects.forEach(project -> {
-                this.matchmakerService.setUpUserProjectMatches(project, (User) k);
-            });
-
-            internships.forEach(internship -> {
-                this.matchmakerService.setUpUserInternshipMatches(internship, (User) k);
-            });
-
             response.put("success", "Registration completed successfully.");
         }
 
@@ -94,12 +78,12 @@ public class RegisterController {
     }
 
     @RequestMapping(path = "/company", method = RequestMethod.POST)
-    private Map<String, String> registerTeam(@RequestParam String email,
-                                             @RequestParam String password,
-                                             @RequestParam String name,
-                                             @RequestParam String country,
-                                             @RequestParam String city,
-                                             @RequestParam String street){
+    private Map<String, String> registeCompany(@RequestParam String email,
+                                               @RequestParam String password,
+                                               @RequestParam String name,
+                                               @RequestParam String country,
+                                               @RequestParam String city,
+                                               @RequestParam String street){
 
         Account k = this.accountService.registerCompany(email, password, name, country, city, street);
 
