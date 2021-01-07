@@ -1,14 +1,11 @@
-package it.finki.tinki.controller;
+package it.finki.tinki.web.controller;
 
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
-import it.finki.tinki.model.Users.User;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.SkillService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,16 +1,16 @@
-package it.finki.tinki.model.pojo;
+package it.finki.tinki.model.dto;
 
 import it.finki.tinki.model.enumerator.AccountType;
 import lombok.Data;
 
 @Data
-public class AuthResponseDataPojo {
-    Long id;
-    String email;
-    String name;
-    AccountType type;
+public class AuthResponseDTO {
+    private Long id;
+    private String email;
+    private String name;
+    private AccountType type;
 
-    public AuthResponseDataPojo() {
+    public AuthResponseDTO() {
         this.id = null;
         this.email = "Wrong username or password!";
         this.name = "Wrong username or password!";

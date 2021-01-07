@@ -1,11 +1,11 @@
-package it.finki.tinki.model.pojo;
+package it.finki.tinki.model.dto;
 
 import it.finki.tinki.model.enumerator.AccountType;
 import lombok.Data;
 
 @Data
-public class AccountLoginDataPojo {
-    private String account;
+public class AccountLoginDTO {
+    private String email;
     private String password;
     private AccountType type;
 }
