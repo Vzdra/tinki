@@ -2,6 +2,8 @@ package it.finki.tinki.web.controller;
 
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
+import it.finki.tinki.model.dto.CompanyRegisterDTO;
+import it.finki.tinki.model.dto.TeamRegisterDTO;
 import it.finki.tinki.model.dto.UserRegisterDTO;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.MatchmakerService;
@@ -49,15 +51,10 @@ public class RegisterController {
         return response;
     }
 
-    //TODO: ADD TEAM AND COMPANY REGISTER TDO --------------------------------------v
-
     @RequestMapping(path = "/team", method = RequestMethod.POST)
-    private Map<String, String> registerTeam(@RequestBody String email,
-                                             @RequestBody String password,
-                                             @RequestBody String name,
-                                             @RequestBody int members){
+    private Map<String, String> registerTeam(@RequestBody TeamRegisterDTO body){
 
-        Account k = this.accountService.registerTeam(email, password, name, members);
+        Account k = this.accountService.registerTeam(body.getEmail(), body.getPassword(), body.getName(), body.getMembers());
 
         Map<String, String> response = new HashMap<>();
 
@@ -71,14 +68,10 @@ public class RegisterController {
     }
 
     @RequestMapping(path = "/company", method = RequestMethod.POST)
-    private Map<String, String> registeCompany(@RequestBody String email,
-                                               @RequestBody String password,
-                                               @RequestBody String name,
-                                               @RequestBody String country,
-                                               @RequestBody String city,
-                                               @RequestBody String street){
+    private Map<String, String> registeCompany(@RequestBody CompanyRegisterDTO body){
 
-        Account k = this.accountService.registerCompany(email, password, name, country, city, street);
+        Account k = this.accountService.registerCompany(body.getEmail(),
+                body.getPassword(), body.getName(), body.getCountry(), body.getCity(), body.getStreet());
 
         Map<String, String> response = new HashMap<>();
 
