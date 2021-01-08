@@ -18,6 +18,7 @@ import it.finki.tinki.service.MatchmakerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -80,27 +81,7 @@ public class AccountServiceImpl implements AccountService {
         User u = new User(email, password, name, AccountType.USER, surname, retainedSkills, skillsToLearn);
         User ru = this.userRepository.save(u);
 
-        List<Job> jobs = this.jobRepository.findAll();
-        List<Project> projects = this.projectRepository.findAll();
-        List<Internship> internships = this.internshipRepository.findAll();
-
-        if(jobs.size()!=0){
-            for (Job job : jobs) {
-                this.matchmakerService.setUpUserJobMatches(job, u);
-            }
-        }
-
-        if(projects.size()!=0){
-            for (Project project : projects) {
-                this.matchmakerService.setUpUserProjectMatches(project, u);
-            }
-        }
-
-        if(internships.size()!=0){
-            for(Internship internship : internships){
-                this.matchmakerService.setUpUserInternshipMatches(internship, u);
-            }
-        }
+        setUpUser(ru);
 
         return ru;
     }
@@ -145,5 +126,113 @@ public class AccountServiceImpl implements AccountService {
         }
 
         return null;
+    }
+
+    public Optional<?> findByIdAndEmail(Long id, String email, AccountType accountType){
+
+        switch (accountType){
+            case USER:
+                return this.userRepository.findByIdAndEmail(id, email);
+            case TEAM:
+                return this.teamRepository.findByIdAndEmail(id, email);
+            case COMPANY:
+                return this.companyRepository.findByIdAndEmail(id, email);
+        }
+
+        return Optional.empty();
+    }
+
+    public User editUser(Long id, String email, String name, String surname, List<Skill> retainedSkills, List<Skill> skillsToLearn){
+        if(email==null || email.isEmpty() || name==null || name.isEmpty() || surname==null || surname.isEmpty()){
+            throw new InvalidArgumentsException();
+        }
+
+        User u = this.userRepository.findById(id).get();
+        Optional<User> t = this.userRepository.findByEmail(email);
+
+        if(t.isPresent() && !t.get().equals(u)){
+            throw new UserExistsException();
+        }
+
+        u.setEmail(email);
+        u.setName(name);
+        u.setSurname(surname);
+        u.setRetainedSkills(retainedSkills);
+        u.setSkillsToLearn(skillsToLearn);
+
+        User m = this.userRepository.save(u);
+
+        setUpUser(m);
+
+        return m;
+    }
+
+    public Company editCompany(Long id, String email, String name, String country, String city, String street){
+        if(email==null || email.isEmpty() || name==null || name.isEmpty()
+                || country==null || country.isEmpty() || city==null || city.isEmpty() || street==null || street.isEmpty()){
+            throw new InvalidArgumentsException();
+        }
+
+        Company c = this.companyRepository.findById(id).get();
+        Optional<Company> t = this.companyRepository.findByEmail(email);
+
+        if(t.isPresent() && !t.get().equals(c)){
+            throw new UserExistsException();
+        }
+
+        c.setEmail(email);
+        c.setName(name);
+
+        Address ad = c.getAddress();
+        ad.setCountry(country);
+        ad.setCity(city);
+        ad.setStreet(street);
+
+        this.addressRepository.save(ad);
+        return this.companyRepository.save(c);
+    }
+
+    public Team editTeam(Long id, String email, String name, int members){
+        if(email==null || email.isEmpty() || name==null || name.isEmpty()){
+            throw new InvalidArgumentsException();
+        }
+
+        Team t = this.teamRepository.findById(id).get();
+        Optional<Team> tt = this.teamRepository.findByEmail(email);
+
+        if(tt.isPresent() && !tt.get().equals(t)){
+            throw new UserExistsException();
+        }
+
+        t.setEmail(email);
+        t.setName(name);
+        t.setMembers(members);
+
+        return this.teamRepository.save(t);
+    }
+
+
+    private void setUpUser(User u){
+        List<Job> jobs = this.jobRepository.findAll();
+        List<Project> projects = this.projectRepository.findAll();
+        List<Internship> internships = this.internshipRepository.findAll();
+
+        if(jobs.size()!=0){
+            for (Job job : jobs) {
+                this.matchmakerService.setUpUserJobMatches(job, u);
+            }
+        }
+
+        if(projects.size()!=0){
+            for (Project project : projects) {
+                this.matchmakerService.setUpUserProjectMatches(project, u);
+            }
+        }
+
+        if(internships.size()!=0){
+            for(Internship internship : internships){
+                this.matchmakerService.setUpUserInternshipMatches(internship, u);
+            }
+        }
     }
 }

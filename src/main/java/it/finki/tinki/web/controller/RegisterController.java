@@ -68,7 +68,7 @@ public class RegisterController {
     }
 
     @RequestMapping(path = "/company", method = RequestMethod.POST)
-    private Map<String, String> registeCompany(@RequestBody CompanyRegisterDTO body){
+    private Map<String, String> registerCompany(@RequestBody CompanyRegisterDTO body){
 
         Account k = this.accountService.registerCompany(body.getEmail(),
                 body.getPassword(), body.getName(), body.getCountry(), body.getCity(), body.getStreet());
