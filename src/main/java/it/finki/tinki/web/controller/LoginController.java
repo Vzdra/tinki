@@ -2,6 +2,7 @@ package it.finki.tinki.web.controller;
 
 import it.finki.tinki.model.Jobs.Internship;
 import it.finki.tinki.model.Jobs.Job;
+import it.finki.tinki.model.Jobs.Project;
 import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.Users.Company;
 import it.finki.tinki.model.Users.Team;
@@ -57,10 +58,22 @@ public class LoginController {
                 uDto.setToLearn(((User) a1).getSkillsToLearn());
 
                 List<Job> matchedJobs = this.matchmakerService.getMatchingJobsForUser((User) a1);
+                List<Project> matchedProjects = this.matchmakerService.getMatchingProjectsForUser((User) a1);
+                List<Internship> matchedInternships = this.matchmakerService.getMatchingInternshipsForUser((User) a1);
 
                 matchedJobs.forEach(job -> {
                     JobResponseDTO dto = new JobResponseDTO(job);
                     uDto.getJobs().add(dto);
+                });
+
+                matchedProjects.forEach(project -> {
+                    ProjectResponseDTO dto = new ProjectResponseDTO(project);
+                    uDto.getProjects().add(dto);
+                });
+
+                matchedInternships.forEach(internship -> {
+                    InternshipResponseDTO dto = new InternshipResponseDTO(internship);
+                    uDto.getInternships().add(dto);
                 });
 
 

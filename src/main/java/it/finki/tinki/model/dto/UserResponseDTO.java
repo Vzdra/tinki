@@ -15,8 +15,8 @@ public class UserResponseDTO extends LoginResponseDTO{
     private List<Skill> retained;
     private List<Skill> toLearn;
     private List<JobResponseDTO> jobs;
-    private List<Internship> internships;
-    private List<Project> projects;
+    private List<InternshipResponseDTO> internships;
+    private List<ProjectResponseDTO> projects;
 
     public UserResponseDTO(){
         retained = new ArrayList<>();
