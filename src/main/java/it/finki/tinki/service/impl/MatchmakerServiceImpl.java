@@ -41,42 +41,42 @@ public class MatchmakerServiceImpl implements MatchmakerService {
 
     @Override
     public List<Internship> getMatchingInternshipsForUser(User user) {
-        List<Match> matches = this.matchRepository.getAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
-//        List<Match> matches = this.matchRepository.getAllByUserIdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
+        List<Match> matches = this.matchRepository.findAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user, WorkType.INTERNSHIP);
 
         List<Internship> internships = new ArrayList<>();
-        matches.forEach(match -> {
-            internships.add((Internship) match.getEmbeddedMatchId().getWork());
-//            internships.add(this.internshipRepository.findById(match.getWorkId()).get());
-        });
+        if(matches.size()!=0){
+            matches.forEach(match -> {
+                internships.add((Internship) match.getEmbeddedMatchId().getWork());
+            });
+        }
 
         return internships;
     }
 
     @Override
     public List<Job> getMatchingJobsForUser(User user) {
-        List<Match> matches = this.matchRepository.getAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
-//        List<Match> matches = this.matchRepository.getAllByUserIdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.JOB);
+        List<Match> matches = this.matchRepository.findAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user, WorkType.JOB);
 
         List<Job> jobs = new ArrayList<>();
-        matches.forEach(match -> {
-            jobs.add((Job) match.getEmbeddedMatchId().getWork());
-//            jobs.add(this.jobRepository.findById(match.getWorkId()).get());
-        });
+        if(matches.size()!=0) {
+            matches.forEach(match -> {
+                jobs.add((Job) match.getEmbeddedMatchId().getWork());
+            });
+        }
 
         return jobs;
     }
 
     @Override
     public List<Project> getMatchingProjectsForUser(User user) {
-        List<Match> matches = this.matchRepository.getAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user.getId(), WorkType.INTERNSHIP);
-//        List<Match> matches = this.matchRepository.getAllByUserIdAndTypeOrderByCoefficientDesc(user.getId(), WorkType.PROJECT);
+        List<Match> matches = this.matchRepository.findAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(user, WorkType.PROJECT);
 
         List<Project> projects = new ArrayList<>();
-        matches.forEach(match -> {
-            projects.add((Project) match.getEmbeddedMatchId().getWork());
-//            projects.add(this.projectRepository.findById(match.getWorkId()).get());
-        });
+        if(matches.size()!=0) {
+            matches.forEach(match -> {
+                projects.add((Project) match.getEmbeddedMatchId().getWork());
+            });
+        }
 
         return projects;
     }
@@ -91,7 +91,6 @@ public class MatchmakerServiceImpl implements MatchmakerService {
         if(coef!=0){
             EmbeddedMatchId embeddedMatchId = new EmbeddedMatchId(job, user);
             Match m = new Match(embeddedMatchId, coef, WorkType.JOB);
-//            Match m = new Match(job.getId(), user.getId(), coef, WorkType.JOB);
             this.matchRepository.save(m);
         }
     }
@@ -106,7 +105,6 @@ public class MatchmakerServiceImpl implements MatchmakerService {
         if(coef!=0){
             EmbeddedMatchId embeddedMatchId = new EmbeddedMatchId(project, user);
             Match m = new Match(embeddedMatchId, coef, WorkType.PROJECT);
-//            Match m = new Match(project.getId(), user.getId(), coef, WorkType.JOB);
             this.matchRepository.save(m);
         }
     }
@@ -121,7 +119,6 @@ public class MatchmakerServiceImpl implements MatchmakerService {
         if(coef!=0){
             EmbeddedMatchId embeddedMatchId = new EmbeddedMatchId(internship, user);
             Match m = new Match(embeddedMatchId, coef, WorkType.PROJECT);
-//            Match m = new Match(internship.getId(), user.getId(), coef, WorkType.JOB);
             this.matchRepository.save(m);
         }
     }

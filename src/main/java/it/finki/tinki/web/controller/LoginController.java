@@ -1,5 +1,7 @@
 package it.finki.tinki.web.controller;
 
+import it.finki.tinki.model.Jobs.Internship;
+import it.finki.tinki.model.Jobs.Job;
 import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.Users.Company;
 import it.finki.tinki.model.Users.Team;
@@ -13,6 +15,7 @@ import org.apache.coyote.Response;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -53,9 +56,13 @@ public class LoginController {
                 uDto.setRetained(((User) a1).getRetainedSkills());
                 uDto.setToLearn(((User) a1).getSkillsToLearn());
 
-                uDto.setInternships(this.matchmakerService.getMatchingInternshipsForUser((User) a1));
-                uDto.setJobs(this.matchmakerService.getMatchingJobsForUser((User) a1));
-                uDto.setProjects(this.matchmakerService.getMatchingProjectsForUser((User) a1));
+                List<Job> matchedJobs = this.matchmakerService.getMatchingJobsForUser((User) a1);
+
+                matchedJobs.forEach(job -> {
+                    JobResponseDTO dto = new JobResponseDTO(job);
+                    uDto.getJobs().add(dto);
+                });
+
 
                 return uDto;
 

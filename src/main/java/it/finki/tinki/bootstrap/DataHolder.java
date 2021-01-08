@@ -68,14 +68,46 @@ public class DataHolder {
         List<Skill> lista;
         lista = skillRepository.findAll();
 
+        List<Skill> l2 = new ArrayList<>();
+        l2.add(skillRepository.getOne(3L));
+        l2.add(skillRepository.getOne(0L));
+        l2.add(skillRepository.getOne(1L));
+        l2.add(skillRepository.getOne(2L));
+        l2.add(skillRepository.getOne(4L));
+        l2.add(skillRepository.getOne(5L));
+        l2.add(skillRepository.getOne(6L));
+        l2.add(skillRepository.getOne(7L));
+
+
+        List<Skill> l3 = new ArrayList<>();
+        l3.add(skillRepository.getOne(3L));
+        l3.add(skillRepository.getOne(0L));
+        l3.add(skillRepository.getOne(5L));
+        l3.add(skillRepository.getOne(6L));
+        l3.add(skillRepository.getOne(7L));
+
         List<Long> ids = new ArrayList<>();
         lista.forEach(item -> {
             ids.add(item.getId());
         });
 
+        List<Long> smalls = new ArrayList<>();
+        l2.forEach(item -> {
+            smalls.add(item.getId());
+        });
+
+        List<Long> sm2 = new ArrayList<>();
+        l3.forEach(item -> {
+            sm2.add(item.getId());
+        });
+
         Account c = this.accountService.registerCompany("asdf@asdf", "pass", "Co.co", "Macedonia", "Skopje", "Pero Nakov");
+        Account m = this.accountService.registerTeam("asdf", "asd", "TeamRocket", 3);
 
         Job j = this.workService.insertJob("Asdf", "Asdfa", c.getId() ,5000, ids, AccountType.COMPANY);
+        Job k = this.workService.insertJob("Asdf", "Asdfa", m.getId() ,5000, ids, AccountType.TEAM);
+        Job z = this.workService.insertJob("asdfq", "asdfqw", m.getId() ,5000, smalls, AccountType.TEAM);
+        Job n = this.workService.insertJob("asdfq", "asdfqw", c.getId() ,5000, sm2, AccountType.COMPANY);
 
         Account u = this.accountService.registerUser("asdf", "asdf", "Zoki", "Poki", lista, lista);
 

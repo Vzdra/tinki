@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, EmbeddedMatchId> {
-    List<Match> getAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(Long uId, WorkType type);
+    List<Match> findAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(User user, WorkType type);
 //    List<Match> getAllByUserIdAndTypeOrderByCoefficientDesc(Long uId, WorkType type);
 }
