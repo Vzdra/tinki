@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 public class CompanyResponseDTO extends LoginResponseDTO {
     private Address address;
-    private List<Job> jobs;
-    private List<Internship> internships;
+    private List<JobResponseDTO> jobs;
+    private List<InternshipResponseDTO> internships;
 }

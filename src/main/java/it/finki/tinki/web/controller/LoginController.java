@@ -32,8 +32,6 @@ public class LoginController {
         this.workService = workService;
     }
 
-    //TODO: ADD JOB/INTERNSHIP RESPONSE TYPE TO COMPANY AND TEAM ---------------------v
-
     @PostMapping(path = "/login")
     public LoginResponseDTO testPage(@RequestBody AccountLoginDTO body) throws ResponseStatusException {
 
@@ -89,8 +87,18 @@ public class LoginController {
                 tDto.setType(AccountType.TEAM);
                 tDto.setMembers(((Team) a1).getMembers());
 
-                tDto.setJobs(this.workService.getAllJobsByAccount(a1.getId()));
-                tDto.setProjects(this.workService.getAllProjectsByAccount(a1.getId()));
+                List<Job> jobs = this.workService.getAllJobsByAccount(a1.getId());
+                List<Project> projects = this.workService.getAllProjectsByAccount(a1.getId());
+
+                jobs.forEach(job -> {
+                    JobResponseDTO dto = new JobResponseDTO(job);
+                    tDto.getJobs().add(dto);
+                });
+
+                projects.forEach(project -> {
+                    ProjectResponseDTO dto = new ProjectResponseDTO(project);
+                    tDto.getProjects().add(dto);
+                });
 
                 return tDto;
 
@@ -106,8 +114,18 @@ public class LoginController {
                 cDto.setType(AccountType.COMPANY);
                 cDto.setAddress(((Company) a1).getAddress());
 
-                cDto.setJobs(this.workService.getAllJobsByAccount(a1.getId()));
-                cDto.setInternships(this.workService.getAllInternshipsByAccount(a1.getId()));
+                List<Job> jobs = this.workService.getAllJobsByAccount(a1.getId());
+                List<Internship> internships = this.workService.getAllInternshipsByAccount(a1.getId());
+
+                jobs.forEach(job -> {
+                    JobResponseDTO dto = new JobResponseDTO(job);
+                    cDto.getJobs().add(dto);
+                });
+
+                internships.forEach(internship -> {
+                    InternshipResponseDTO dto = new InternshipResponseDTO(internship);
+                    cDto.getInternships().add(dto);
+                });
 
                 return cDto;
 
