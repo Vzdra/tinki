@@ -7,6 +7,7 @@ import it.finki.tinki.model.Jobs.Project;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.Users.User;
+import it.finki.tinki.model.dto.UserRegisterDTO;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.MatchmakerService;
 import it.finki.tinki.service.SkillService;
@@ -35,17 +36,12 @@ public class RegisterController {
     }
 
     @RequestMapping(path = "/user", method = RequestMethod.POST)
-    private Map<String, String> registerUser(@RequestParam String email,
-                                             @RequestParam String password,
-                                             @RequestParam String name,
-                                             @RequestParam String surname,
-                                             @RequestParam List<Long> retainedSkills,
-                                             @RequestParam List<Long> skillsToLearn){
+    private Map<String, String> registerUser(@RequestBody UserRegisterDTO body){
 
-        List<Skill> retained = this.skillService.returnSkillsBasedOnId(retainedSkills);
-        List<Skill> toLearn = this.skillService.returnSkillsBasedOnId(skillsToLearn);
+        List<Skill> retained = this.skillService.returnSkillsBasedOnId(body.getRetainedSkills());
+        List<Skill> toLearn = this.skillService.returnSkillsBasedOnId(body.getSkillsToLearn());
 
-        Account k = this.accountService.registerUser(email, password, name, surname, retained, toLearn);
+        Account k = this.accountService.registerUser(body.getEmail(), body.getPassword(), body.getName(), body.getSurname(), retained, toLearn);
 
         Map<String, String> response = new HashMap<>();
 
@@ -59,10 +55,10 @@ public class RegisterController {
     }
 
     @RequestMapping(path = "/team", method = RequestMethod.POST)
-    private Map<String, String> registerTeam(@RequestParam String email,
-                                             @RequestParam String password,
-                                             @RequestParam String name,
-                                             @RequestParam int members){
+    private Map<String, String> registerTeam(@RequestBody String email,
+                                             @RequestBody String password,
+                                             @RequestBody String name,
+                                             @RequestBody int members){
 
         Account k = this.accountService.registerTeam(email, password, name, members);
 
@@ -78,12 +74,12 @@ public class RegisterController {
     }
 
     @RequestMapping(path = "/company", method = RequestMethod.POST)
-    private Map<String, String> registeCompany(@RequestParam String email,
-                                               @RequestParam String password,
-                                               @RequestParam String name,
-                                               @RequestParam String country,
-                                               @RequestParam String city,
-                                               @RequestParam String street){
+    private Map<String, String> registeCompany(@RequestBody String email,
+                                               @RequestBody String password,
+                                               @RequestBody String name,
+                                               @RequestBody String country,
+                                               @RequestBody String city,
+                                               @RequestBody String street){
 
         Account k = this.accountService.registerCompany(email, password, name, country, city, street);
 

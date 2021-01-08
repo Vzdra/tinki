@@ -60,6 +60,7 @@ public class MatchmakerServiceImpl implements MatchmakerService {
         List<Job> jobs = new ArrayList<>();
         if(matches.size()!=0) {
             matches.forEach(match -> {
+                System.out.println(match.getCoefficient());
                 jobs.add((Job) match.getEmbeddedMatchId().getWork());
             });
         }

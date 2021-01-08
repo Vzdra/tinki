@@ -28,4 +28,8 @@ public class User extends Account{
         this.retainedSkills = retainedSkills;
         this.skillsToLearn = skillsToLearn;
     }
+
+    public String toString(){
+        return "";
+    }
 }

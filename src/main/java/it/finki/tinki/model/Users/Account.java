@@ -1,5 +1,6 @@
 package it.finki.tinki.model.Users;
 
+import com.sun.istack.NotNull;
 import it.finki.tinki.model.enumerator.AccountType;
 import lombok.Data;
 
@@ -15,10 +16,13 @@ public abstract class Account {
     Long id;
 
     @Column(unique = true)
+    @NotNull
     String email;
 
+    @NotNull
     String password;
 
+    @NotNull
     String name;
 
     AccountType accountType;
