@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/edit")
-public class EditController {
+@RequestMapping(path = "/api/edit/account")
+public class AccountEditController {
 
     AccountService accountService;
     SkillService skillService;
 
-    public EditController(AccountService accountService, SkillService skillService) {
+    public AccountEditController(AccountService accountService, SkillService skillService) {
         this.accountService = accountService;
         this.skillService = skillService;
     }
@@ -40,11 +40,13 @@ public class EditController {
             List<Skill> retained = this.skillService.returnSkillsBasedOnId(body.getRetainedSkills());
             List<Skill> toLearn = this.skillService.returnSkillsBasedOnId(body.getSkillsToLearn());
 
-            User u = (User) this.accountService.editUser(id, body.getEmail(), body.getName(), body.getSurname(), retained, toLearn);
+            User u = this.accountService.editUser(id, body.getEmail(), body.getName(), body.getSurname(), retained, toLearn);
 
             UserResponseDTO userResponseDTO = new UserResponseDTO();
 
+            userResponseDTO.setId(u.getId());
             userResponseDTO.setEmail(u.getEmail());
+            userResponseDTO.setType(AccountType.USER);
             userResponseDTO.setName(u.getName());
             userResponseDTO.setSurname(u.getSurname());
             userResponseDTO.setRetained(u.getRetainedSkills());
@@ -68,7 +70,9 @@ public class EditController {
 
             CompanyResponseDTO companyResponseDTO = new CompanyResponseDTO();
 
+            companyResponseDTO.setId(c.getId());
             companyResponseDTO.setEmail(c.getEmail());
+            companyResponseDTO.setType(AccountType.COMPANY);
             companyResponseDTO.setName(c.getName());
             companyResponseDTO.setAddress(c.getAddress());
 
@@ -90,7 +94,9 @@ public class EditController {
 
             TeamResponseDTO teamResponseDTO = new TeamResponseDTO();
 
+            teamResponseDTO.setId(t.getId());
             teamResponseDTO.setEmail(t.getEmail());
+            teamResponseDTO.setType(AccountType.TEAM);
             teamResponseDTO.setName(t.getName());
             teamResponseDTO.setMembers(t.getMembers());
 
