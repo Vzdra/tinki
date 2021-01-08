@@ -1,8 +1,5 @@
 package it.finki.tinki.model.dto;
 
-import it.finki.tinki.model.Jobs.Internship;
-import it.finki.tinki.model.Jobs.Job;
-import it.finki.tinki.model.Jobs.Project;
 import it.finki.tinki.model.Skill;
 import lombok.Data;
 

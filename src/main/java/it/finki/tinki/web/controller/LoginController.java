@@ -12,12 +12,10 @@ import it.finki.tinki.model.enumerator.AccountType;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.MatchmakerService;
 import it.finki.tinki.service.WorkService;
-import org.apache.coyote.Response;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -34,10 +32,10 @@ public class LoginController {
         this.workService = workService;
     }
 
+    //TODO: ADD JOB/INTERNSHIP RESPONSE TYPE TO COMPANY AND TEAM ---------------------v
+
     @PostMapping(path = "/login")
     public LoginResponseDTO testPage(@RequestBody AccountLoginDTO body) throws ResponseStatusException {
-
-        System.out.println(body);
 
         Account a1 = accountService.findUser(body.getEmail(), body.getPassword(), body.getType());
 
@@ -88,7 +86,7 @@ public class LoginController {
                 tDto.setId(a1.getId());
                 tDto.setEmail(a1.getEmail());
                 tDto.setName(a1.getName());
-                tDto.setType(AccountType.USER);
+                tDto.setType(AccountType.TEAM);
                 tDto.setMembers(((Team) a1).getMembers());
 
                 tDto.setJobs(this.workService.getAllJobsByAccount(a1.getId()));
@@ -105,7 +103,7 @@ public class LoginController {
                 cDto.setId(a1.getId());
                 cDto.setEmail(a1.getEmail());
                 cDto.setName(a1.getName());
-                cDto.setType(AccountType.USER);
+                cDto.setType(AccountType.COMPANY);
                 cDto.setAddress(((Company) a1).getAddress());
 
                 cDto.setJobs(this.workService.getAllJobsByAccount(a1.getId()));

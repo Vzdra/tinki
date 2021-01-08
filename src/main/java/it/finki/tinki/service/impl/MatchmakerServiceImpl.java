@@ -5,7 +5,6 @@ import it.finki.tinki.model.EmbeddedMatchId;
 import it.finki.tinki.model.Jobs.Internship;
 import it.finki.tinki.model.Jobs.Job;
 import it.finki.tinki.model.Jobs.Project;
-import it.finki.tinki.model.Jobs.Work;
 import it.finki.tinki.model.Match;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.User;
@@ -60,7 +59,6 @@ public class MatchmakerServiceImpl implements MatchmakerService {
         List<Job> jobs = new ArrayList<>();
         if(matches.size()!=0) {
             matches.forEach(match -> {
-                System.out.println(match.getCoefficient());
                 jobs.add((Job) match.getEmbeddedMatchId().getWork());
             });
         }

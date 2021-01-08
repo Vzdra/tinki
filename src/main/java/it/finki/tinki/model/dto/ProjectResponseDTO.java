@@ -1,9 +1,6 @@
 package it.finki.tinki.model.dto;
 
-import it.finki.tinki.model.Address;
-import it.finki.tinki.model.Jobs.Job;
 import it.finki.tinki.model.Jobs.Project;
-import it.finki.tinki.model.Users.Company;
 import it.finki.tinki.model.Users.Team;
 import it.finki.tinki.model.enumerator.AccountType;
 import lombok.Data;

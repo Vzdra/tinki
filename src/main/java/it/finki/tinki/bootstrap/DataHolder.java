@@ -1,20 +1,12 @@
 package it.finki.tinki.bootstrap;
 
-import it.finki.tinki.model.Address;
-import it.finki.tinki.model.EmbeddedMatchId;
 import it.finki.tinki.model.Jobs.Job;
-import it.finki.tinki.model.Jobs.Work;
-import it.finki.tinki.model.Match;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
-import it.finki.tinki.model.Users.Company;
-import it.finki.tinki.model.Users.User;
 import it.finki.tinki.model.enumerator.AccountType;
-import it.finki.tinki.model.enumerator.WorkType;
 import it.finki.tinki.repository.*;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.WorkService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

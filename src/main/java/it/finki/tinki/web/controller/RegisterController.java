@@ -1,12 +1,7 @@
 package it.finki.tinki.web.controller;
 
-import it.finki.tinki.helper.Matchmaker;
-import it.finki.tinki.model.Jobs.Internship;
-import it.finki.tinki.model.Jobs.Job;
-import it.finki.tinki.model.Jobs.Project;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
-import it.finki.tinki.model.Users.User;
 import it.finki.tinki.model.dto.UserRegisterDTO;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.MatchmakerService;
@@ -53,6 +48,8 @@ public class RegisterController {
 
         return response;
     }
+
+    //TODO: ADD TEAM AND COMPANY REGISTER TDO --------------------------------------v
 
     @RequestMapping(path = "/team", method = RequestMethod.POST)
     private Map<String, String> registerTeam(@RequestBody String email,

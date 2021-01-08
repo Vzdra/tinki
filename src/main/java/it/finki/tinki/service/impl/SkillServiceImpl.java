@@ -1,7 +1,6 @@
 package it.finki.tinki.service.impl;
 
 import it.finki.tinki.model.Skill;
-import it.finki.tinki.model.exception.SkillNotFoundException;
 import it.finki.tinki.repository.SkillRepository;
 import it.finki.tinki.service.SkillService;
 import org.springframework.stereotype.Service;

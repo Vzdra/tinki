@@ -21,6 +21,8 @@ public class Matchmaker {
             }
         }
 
+        System.out.println(k/coef);
+
         return k/coef;
     }
 
