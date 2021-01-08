@@ -2,9 +2,9 @@ package it.finki.tinki.web.controller;
 
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
-import it.finki.tinki.model.dto.CompanyRegisterDTO;
-import it.finki.tinki.model.dto.TeamRegisterDTO;
-import it.finki.tinki.model.dto.UserRegisterDTO;
+import it.finki.tinki.model.dto.register.account.CompanyRegisterDTO;
+import it.finki.tinki.model.dto.register.account.TeamRegisterDTO;
+import it.finki.tinki.model.dto.register.account.UserRegisterDTO;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.MatchmakerService;
 import it.finki.tinki.service.SkillService;

@@ -1,18 +1,19 @@
 package it.finki.tinki.web.controller;
 
 import it.finki.tinki.model.Skill;
-import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.Users.Company;
 import it.finki.tinki.model.Users.Team;
 import it.finki.tinki.model.Users.User;
-import it.finki.tinki.model.dto.*;
+import it.finki.tinki.model.dto.register.account.CompanyRegisterDTO;
+import it.finki.tinki.model.dto.register.account.TeamRegisterDTO;
+import it.finki.tinki.model.dto.register.account.UserRegisterDTO;
+import it.finki.tinki.model.dto.response.account.CompanyResponseDTO;
+import it.finki.tinki.model.dto.response.account.TeamResponseDTO;
+import it.finki.tinki.model.dto.response.account.UserResponseDTO;
 import it.finki.tinki.model.enumerator.AccountType;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.SkillService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,7 @@ public class AccountEditController {
         this.skillService = skillService;
     }
 
-    @RequestMapping(path = "/user/{id}/{email}")
+    @PostMapping(path = "/user/{id}/{email}")
     public UserResponseDTO editUser(@PathVariable(name = "id") Long id,
                                     @PathVariable(name = "email") String email,
                                     @RequestBody UserRegisterDTO body){
@@ -47,6 +48,7 @@ public class AccountEditController {
             userResponseDTO.setId(u.getId());
             userResponseDTO.setEmail(u.getEmail());
             userResponseDTO.setType(AccountType.USER);
+            userResponseDTO.setError(null);
             userResponseDTO.setName(u.getName());
             userResponseDTO.setSurname(u.getSurname());
             userResponseDTO.setRetained(u.getRetainedSkills());
@@ -58,7 +60,7 @@ public class AccountEditController {
         return null;
     }
 
-    @RequestMapping(path = "/company/{id}/{email}")
+    @PostMapping(path = "/company/{id}/{email}")
     public CompanyResponseDTO editCompany(@PathVariable(name = "id") Long id,
                                           @PathVariable(name = "email") String email,
                                           @RequestBody CompanyRegisterDTO body){
@@ -72,6 +74,7 @@ public class AccountEditController {
 
             companyResponseDTO.setId(c.getId());
             companyResponseDTO.setEmail(c.getEmail());
+            companyResponseDTO.setError(null);
             companyResponseDTO.setType(AccountType.COMPANY);
             companyResponseDTO.setName(c.getName());
             companyResponseDTO.setAddress(c.getAddress());
@@ -82,7 +85,7 @@ public class AccountEditController {
         return null;
     }
 
-    @RequestMapping(path = "/team/{id}/{email}")
+    @PostMapping(path = "/team/{id}/{email}")
     public TeamResponseDTO editTeam(@PathVariable(name = "id") Long id,
                                     @PathVariable(name = "email") String email,
                                     @RequestBody TeamRegisterDTO body){
@@ -96,6 +99,7 @@ public class AccountEditController {
 
             teamResponseDTO.setId(t.getId());
             teamResponseDTO.setEmail(t.getEmail());
+            teamResponseDTO.setError(null);
             teamResponseDTO.setType(AccountType.TEAM);
             teamResponseDTO.setName(t.getName());
             teamResponseDTO.setMembers(t.getMembers());

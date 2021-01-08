@@ -1,6 +1,8 @@
-package it.finki.tinki.model.dto;
+package it.finki.tinki.model.dto.response.account;
 
 import it.finki.tinki.model.Address;
+import it.finki.tinki.model.dto.response.work.InternshipResponseDTO;
+import it.finki.tinki.model.dto.response.work.JobResponseDTO;
 import lombok.Data;
 
 import java.util.ArrayList;

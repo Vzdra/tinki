@@ -1,6 +1,6 @@
 package it.finki.tinki.repository;
 
-import it.finki.tinki.model.Jobs.Project;
+import it.finki.tinki.model.Work.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

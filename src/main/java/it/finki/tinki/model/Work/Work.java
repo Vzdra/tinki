@@ -1,4 +1,4 @@
-package it.finki.tinki.model.Jobs;
+package it.finki.tinki.model.Work;
 
 import it.finki.tinki.model.Users.Account;
 import lombok.Data;

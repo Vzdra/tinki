@@ -1,13 +1,16 @@
-package it.finki.tinki.model.dto;
+package it.finki.tinki.model.dto.response.account;
 
 import it.finki.tinki.model.Skill;
+import it.finki.tinki.model.dto.response.work.InternshipResponseDTO;
+import it.finki.tinki.model.dto.response.work.JobResponseDTO;
+import it.finki.tinki.model.dto.response.work.ProjectResponseDTO;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class UserResponseDTO extends LoginResponseDTO{
+public class UserResponseDTO extends LoginResponseDTO {
     private String surname;
     private List<Skill> retained;
     private List<Skill> toLearn;

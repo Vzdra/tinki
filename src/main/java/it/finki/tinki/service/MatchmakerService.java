@@ -1,8 +1,8 @@
 package it.finki.tinki.service;
 
-import it.finki.tinki.model.Jobs.Internship;
-import it.finki.tinki.model.Jobs.Job;
-import it.finki.tinki.model.Jobs.Project;
+import it.finki.tinki.model.Work.Internship;
+import it.finki.tinki.model.Work.Job;
+import it.finki.tinki.model.Work.Project;
 import it.finki.tinki.model.Users.User;
 
 import java.util.List;

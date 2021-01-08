@@ -1,6 +1,6 @@
 package it.finki.tinki.bootstrap;
 
-import it.finki.tinki.model.Jobs.Job;
+import it.finki.tinki.model.Work.Job;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.enumerator.AccountType;

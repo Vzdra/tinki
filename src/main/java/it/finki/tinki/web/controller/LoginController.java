@@ -1,13 +1,20 @@
 package it.finki.tinki.web.controller;
 
-import it.finki.tinki.model.Jobs.Internship;
-import it.finki.tinki.model.Jobs.Job;
-import it.finki.tinki.model.Jobs.Project;
+import it.finki.tinki.model.Work.Internship;
+import it.finki.tinki.model.Work.Job;
+import it.finki.tinki.model.Work.Project;
 import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.Users.Company;
 import it.finki.tinki.model.Users.Team;
 import it.finki.tinki.model.Users.User;
 import it.finki.tinki.model.dto.*;
+import it.finki.tinki.model.dto.response.account.LoginResponseDTO;
+import it.finki.tinki.model.dto.response.account.CompanyResponseDTO;
+import it.finki.tinki.model.dto.response.account.TeamResponseDTO;
+import it.finki.tinki.model.dto.response.account.UserResponseDTO;
+import it.finki.tinki.model.dto.response.work.InternshipResponseDTO;
+import it.finki.tinki.model.dto.response.work.JobResponseDTO;
+import it.finki.tinki.model.dto.response.work.ProjectResponseDTO;
 import it.finki.tinki.model.enumerator.AccountType;
 import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.MatchmakerService;

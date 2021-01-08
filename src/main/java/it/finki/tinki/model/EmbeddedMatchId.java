@@ -1,6 +1,6 @@
 package it.finki.tinki.model;
 
-import it.finki.tinki.model.Jobs.Work;
+import it.finki.tinki.model.Work.Work;
 import it.finki.tinki.model.Users.User;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package it.finki.tinki.model.dto;
+package it.finki.tinki.model.dto.response.account;
 
 import it.finki.tinki.model.enumerator.AccountType;
 import lombok.Data;

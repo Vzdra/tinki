@@ -1,9 +1,9 @@
 package it.finki.tinki.service.impl;
 
 import it.finki.tinki.model.Address;
-import it.finki.tinki.model.Jobs.Internship;
-import it.finki.tinki.model.Jobs.Job;
-import it.finki.tinki.model.Jobs.Project;
+import it.finki.tinki.model.Work.Internship;
+import it.finki.tinki.model.Work.Job;
+import it.finki.tinki.model.Work.Project;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.Users.Company;
