@@ -67,21 +67,6 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public List<Job> getAllJobs() {
-        return this.jobRepository.findAll();
-    }
-
-    @Override
-    public List<Internship> getAllInternships() {
-        return this.internshipRepository.findAll();
-    }
-
-    @Override
-    public List<Project> getAllProjects() {
-        return this.projectRepository.findAll();
-    }
-
-    @Override
     public Job insertJob(String title, String description, Long adccId, int salary, List<Long> skillsRequired, AccountType type) {
         List<Skill> skills = this.skillService.returnSkillsBasedOnId(skillsRequired);
         Account account = this.accountService.findByIdAndType(adccId, type);
@@ -127,6 +112,39 @@ public class WorkServiceImpl implements WorkService {
         });
 
         return jb;
+    }
+
+    @Override
+    public Job editJob(Long id, String title, String description, int salary) {
+        Job j = this.jobRepository.findById(id).get();
+
+        j.setTitle(title);
+        j.setDescription(description);
+        j.setSalary(salary);
+
+        return this.jobRepository.save(j);
+    }
+
+    @Override
+    public Internship editInternship(Long id, String title, String description, int salary, int openSpots) {
+        Internship j = this.internshipRepository.findById(id).get();
+
+        j.setTitle(title);
+        j.setDescription(description);
+        j.setSalary(salary);
+
+        return this.internshipRepository.save(j);
+    }
+
+    @Override
+    public Project editProject(Long id, String title, String description, int salary) {
+        Project j = this.projectRepository.findById(id).get();
+
+        j.setTitle(title);
+        j.setDescription(description);
+        j.setSalary(salary);
+
+        return this.projectRepository.save(j);
     }
 
     @Override
@@ -205,5 +223,20 @@ public class WorkServiceImpl implements WorkService {
         });
 
         return jobs2;
+    }
+
+    @Override
+    public Job getJobById(Long id) {
+        return this.jobRepository.findById(id).get();
+    }
+
+    @Override
+    public Internship getInternshipById(Long id) {
+        return this.internshipRepository.findById(id).get();
+    }
+
+    @Override
+    public Project getProjectById(Long id) {
+        return this.projectRepository.findById(id).get();
     }
 }

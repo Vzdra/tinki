@@ -12,8 +12,6 @@ import it.finki.tinki.model.dto.response.work.ProjectResponseDTO;
 import it.finki.tinki.service.WorkService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(path = "/api/register/work")
 public class WorkRegisterController {
