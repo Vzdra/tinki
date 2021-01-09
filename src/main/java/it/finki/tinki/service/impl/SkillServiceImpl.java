@@ -28,4 +28,8 @@ public class SkillServiceImpl implements SkillService {
 
         return list;
     }
+
+    public List<Skill> returnBasedOnText(String text){
+        return this.skillRepository.findAllByNameContaining(text);
+    }
 }

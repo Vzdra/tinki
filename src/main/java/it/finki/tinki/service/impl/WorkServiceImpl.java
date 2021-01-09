@@ -6,6 +6,11 @@ import it.finki.tinki.model.Work.Job;
 import it.finki.tinki.model.Work.Project;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
+import it.finki.tinki.model.Work.Work;
+import it.finki.tinki.model.dto.response.work.InternshipResponseDTO;
+import it.finki.tinki.model.dto.response.work.JobResponseDTO;
+import it.finki.tinki.model.dto.response.work.ProjectResponseDTO;
+import it.finki.tinki.model.dto.response.work.WorkResponseDTO;
 import it.finki.tinki.model.enumerator.AccountType;
 import it.finki.tinki.repository.*;
 import it.finki.tinki.service.AccountService;
@@ -14,8 +19,7 @@ import it.finki.tinki.service.SkillService;
 import it.finki.tinki.service.WorkService;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class WorkServiceImpl implements WorkService {
@@ -123,5 +127,83 @@ public class WorkServiceImpl implements WorkService {
         });
 
         return jb;
+    }
+
+    @Override
+    public List<JobResponseDTO> fullTextJobSearch(String text) {
+        List<Skill> skills = this.skillService.returnBasedOnText(text);
+
+        List<Job> jobs = this.jobRepository.findAllByTitleContainsOrDescriptionContains(text,text);
+        List<Job> sjob = new ArrayList<>();
+
+        skills.forEach(skill -> {
+            sjob.addAll(this.jobRepository.findAllBySkillsRequiredContaining(skill));
+        });
+
+        sjob.forEach(job -> {
+            if(!jobs.contains(job)){
+                jobs.add(job);
+            }
+        });
+
+        List<JobResponseDTO> jobs2 = new ArrayList<>();
+
+        jobs.forEach(job -> {
+            jobs2.add(new JobResponseDTO(job));
+        });
+
+        return jobs2;
+    }
+
+    @Override
+    public List<InternshipResponseDTO> fullTextInternshipSearch(String text) {
+        List<Skill> skills = this.skillService.returnBasedOnText(text);
+
+        List<Internship> jobs = this.internshipRepository.findAllByTitleContainsOrDescriptionContains(text,text);
+        List<Internship> sjob = new ArrayList<>();
+
+        skills.forEach(skill -> {
+            sjob.addAll(this.internshipRepository.findAllBySkillsTrainedContaining(skill));
+        });
+
+        sjob.forEach(job -> {
+            if(!jobs.contains(job)){
+                jobs.add(job);
+            }
+        });
+
+        List<InternshipResponseDTO> jobs2 = new ArrayList<>();
+
+        jobs.forEach(job -> {
+            jobs2.add(new InternshipResponseDTO(job));
+        });
+
+        return jobs2;
+    }
+
+    @Override
+    public List<ProjectResponseDTO> fullTextProjectSearch(String text) {
+        List<Skill> skills = this.skillService.returnBasedOnText(text);
+
+        List<Project> jobs = this.projectRepository.findAllByTitleContainsOrDescriptionContains(text,text);
+        List<Project> sjob = new ArrayList<>();
+
+        skills.forEach(skill -> {
+            sjob.addAll(this.projectRepository.findAllBySkillsRequiredContaining(skill));
+        });
+
+        sjob.forEach(job -> {
+            if(!jobs.contains(job)){
+                jobs.add(job);
+            }
+        });
+
+        List<ProjectResponseDTO> jobs2 = new ArrayList<>();
+
+        jobs.forEach(job -> {
+            jobs2.add(new ProjectResponseDTO(job));
+        });
+
+        return jobs2;
     }
 }

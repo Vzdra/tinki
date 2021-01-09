@@ -148,4 +148,19 @@ public class LoginController {
         return cDto;
     }
 
+    @GetMapping(path = "/job/search")
+    public List<JobResponseDTO> jobRes(@RequestParam(name = "text") String text){
+        return this.workService.fullTextJobSearch(text);
+    }
+
+    @GetMapping(path = "/internship/search")
+    public List<InternshipResponseDTO> internshipRes(@RequestParam(name = "text") String text){
+        return this.workService.fullTextInternshipSearch(text);
+    }
+
+    @GetMapping(path = "/project/search")
+    public List<ProjectResponseDTO> projectRes(@RequestParam(name = "text") String text){
+        return this.workService.fullTextProjectSearch(text);
+    }
+
 }
