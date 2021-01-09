@@ -18,6 +18,6 @@ public interface AccountService {
     Account findByIdAndType(Long accId, AccountType type);
     User editUser(Long id, String email, String name, String surname, List<Skill> retainedSkills, List<Skill> skillsToLearn);
     Company editCompany(Long id, String email, String name, String country, String city, String street);
-    Optional<?> findByIdAndEmail(Long id, String email, AccountType type);
     Team editTeam(Long id, String email, String name, int members);
+    Optional<?> findByIdAndEmail(Long id, String email, AccountType type);
 }

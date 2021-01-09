@@ -10,4 +10,5 @@ public class TinkiApplication {
     public static void main(String[] args) {
         SpringApplication.run(TinkiApplication.class, args);
     }
+
 }

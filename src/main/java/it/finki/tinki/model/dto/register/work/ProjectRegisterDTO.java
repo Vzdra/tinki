@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class ProjectRegisterDTO {
+public class ProjectRegisterDTO extends WorkRegisterDTO {
     Date validUntil;
     List<Long> skillsRequired;
 }

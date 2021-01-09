@@ -1,16 +1,15 @@
 package it.finki.tinki.service.impl;
 
+import it.finki.tinki.model.Users.User;
 import it.finki.tinki.model.Work.Internship;
 import it.finki.tinki.model.Work.Job;
 import it.finki.tinki.model.Work.Project;
 import it.finki.tinki.model.Skill;
 import it.finki.tinki.model.Users.Account;
 import it.finki.tinki.model.enumerator.AccountType;
-import it.finki.tinki.repository.InternshipRepository;
-import it.finki.tinki.repository.JobRepository;
-import it.finki.tinki.repository.MatchRepository;
-import it.finki.tinki.repository.ProjectRepository;
+import it.finki.tinki.repository.*;
 import it.finki.tinki.service.AccountService;
+import it.finki.tinki.service.MatchmakerService;
 import it.finki.tinki.service.SkillService;
 import it.finki.tinki.service.WorkService;
 import org.springframework.stereotype.Service;
@@ -25,21 +24,27 @@ public class WorkServiceImpl implements WorkService {
     InternshipRepository internshipRepository;
     ProjectRepository projectRepository;
     MatchRepository matchRepository;
+    MatchmakerService matchmakerService;
     SkillService skillService;
     AccountService accountService;
+    UserRepository userRepository;
 
     public WorkServiceImpl(JobRepository jobRepository,
                            InternshipRepository internshipRepository,
                            ProjectRepository projectRepository,
                            MatchRepository matchRepository,
                            SkillService skillService,
-                           AccountService accountService) {
+                           AccountService accountService,
+                           UserRepository userRepository,
+                           MatchmakerService matchmakerService) {
         this.jobRepository = jobRepository;
         this.internshipRepository = internshipRepository;
         this.projectRepository = projectRepository;
         this.matchRepository = matchRepository;
         this.skillService = skillService;
         this.accountService = accountService;
+        this.userRepository = userRepository;
+        this.matchmakerService = matchmakerService;
     }
 
     @Override
@@ -77,7 +82,15 @@ public class WorkServiceImpl implements WorkService {
         List<Skill> skills = this.skillService.returnSkillsBasedOnId(skillsRequired);
         Account account = this.accountService.findByIdAndType(adccId, type);
         Job j = new Job(title, description, account, salary, skills);
-        return this.jobRepository.save(j);
+        Job jb = this.jobRepository.save(j);
+
+        List<User> users = this.userRepository.findAll();
+
+        users.forEach(user -> {
+            this.matchmakerService.setUpUserJobMatches(jb, user);
+        });
+
+        return jb;
     }
 
     @Override
@@ -85,7 +98,15 @@ public class WorkServiceImpl implements WorkService {
         List<Skill> skills = this.skillService.returnSkillsBasedOnId(skillsTrained);
         Account account = this.accountService.findByIdAndType(adccId, type);
         Internship j = new Internship(title, description, account, salary, skills, openSpots);
-        return this.internshipRepository.save(j);
+        Internship jb = this.internshipRepository.save(j);
+
+        List<User> users = this.userRepository.findAll();
+
+        users.forEach(user -> {
+            this.matchmakerService.setUpUserInternshipMatches(jb, user);
+        });
+
+        return jb;
     }
 
     @Override
@@ -93,6 +114,14 @@ public class WorkServiceImpl implements WorkService {
         List<Skill> skills = this.skillService.returnSkillsBasedOnId(skillsRequired);
         Account account = this.accountService.findByIdAndType(adccId, type);
         Project j = new Project(title, description, account, salary, skills, validUntil);
-        return this.projectRepository.save(j);
+        Project jb = this.projectRepository.save(j);
+
+        List<User> users = this.userRepository.findAll();
+
+        users.forEach(user -> {
+            this.matchmakerService.setUpUserProjectMatches(jb, user);
+        });
+
+        return jb;
     }
 }

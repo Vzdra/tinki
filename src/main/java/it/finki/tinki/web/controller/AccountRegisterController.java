@@ -18,14 +18,14 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/register")
-public class RegisterController {
+public class AccountRegisterController {
 
     AccountService accountService;
     SkillService skillService;
     WorkService workService;
     MatchmakerService matchmakerService;
 
-    public RegisterController(AccountService accountService, SkillService skillService, WorkService workService, MatchmakerService matchmakerService) {
+    public AccountRegisterController(AccountService accountService, SkillService skillService, WorkService workService, MatchmakerService matchmakerService) {
         this.accountService = accountService;
         this.skillService = skillService;
         this.workService = workService;

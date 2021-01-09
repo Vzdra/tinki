@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class InternshipRegisterDTO {
+public class InternshipRegisterDTO extends WorkRegisterDTO {
     int openSpots;
     List<Long> skillsTrained;
 }
