@@ -42,6 +42,7 @@ public class LoginController {
     @PostMapping(path = "/login")
     public LoginResponseDTO loginProcess(@RequestBody AccountLoginDTO body) throws ResponseStatusException {
 
+        System.out.println(body);
         Account a1 = accountService.findUser(body.getEmail(), body.getPassword(), body.getType());
 
         if(a1!=null){

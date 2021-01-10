@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from '../login/login';
+import Profile from "../data/profile";
 import 'semantic-ui-css/semantic.min.css';
 import HeaderComp from '../template/header';
 import './App.css';
@@ -10,19 +11,17 @@ class App extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      id: null,
-      email: null,
-      name: null,
-      type: null
+      currentUser: {}
     }
   }
 
   render(){
       return(
           <Router>
-              <HeaderComp acc={this.state.email} accType={this.state.type} name={this.state.name}/>
+              <HeaderComp acc={this.state.currentUser.email} accType={this.state.currentUser.type} name={this.state.currentUser.name}/>
               <main>
                   <Route path={"/login"} render={() => <Login onCompleteForm={this.attemptLogin}/>}/>
+                  <Route path={"/profile"} render={() => <Profile userProfile={this.state.currentUser}/>}/>
                   <Route path={"/"}/>
                   <Route path={"/jobs"}/>
                   <Route path={"/internships"}/>
@@ -31,14 +30,12 @@ class App extends Component{
       );
   }
 
-  attemptLogin = (username, password, type) => {
-      UserLogin.login(username, password, type).then((res) =>{
+  attemptLogin = (email, password, type) => {
+
+      UserLogin.login(email, password, type).then((res) =>{
           console.log(res.data);
           this.setState({
-            id: res.data.id,
-            email: res.data.email,
-            name: res.data.name,
-            type: res.data.type
+              currentUser: res.data
           });
       });
   }

@@ -13,6 +13,7 @@ import it.finki.tinki.service.WorkService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(path = "/api/register/work")
 public class WorkRegisterController {
 

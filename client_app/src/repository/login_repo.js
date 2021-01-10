@@ -1,9 +1,9 @@
 import axios from '../custom_axios/axios';
 
 const UserLogin = {
-    login: (username, password, type) => {
+    login: (email, password, type) => {
         return axios.post("/login", {
-            "account": username,
+            "email": email,
             "password": password,
             "type": type
         });

@@ -30,16 +30,28 @@ const HeaderComp = (props) => {
         }else if(props.accType==="TEAM"){
             return(
                 <Menu inverted position="right">
-                    <Menu.Item as={Link} to='/login'>
-                        Team
+                    <Menu.Item as={Link} to='/profile'>
+                        Profile
+                    </Menu.Item>
+                    <Menu.Item as={Link} to='/jobs'>
+                        Jobs
+                    </Menu.Item>
+                    <Menu.Item as={Link} to='/projects'>
+                        Projects
                     </Menu.Item>
                 </Menu>
             );
         }else if(props.accType==="USER"){
             return(
                 <Menu inverted position="right">
-                    <Menu.Item as={Link} to='/login'>
-                        User
+                    <Menu.Item as={Link} to='/profile'>
+                        Profile
+                    </Menu.Item>
+                    <Menu.Item as={Link} to='/jobs'>
+                        Jobs
+                    </Menu.Item>
+                    <Menu.Item as={Link} to='/internships'>
+                        Internships
                     </Menu.Item>
                 </Menu>
             );
