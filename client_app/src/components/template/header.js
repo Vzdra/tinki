@@ -53,6 +53,12 @@ const HeaderComp = (props) => {
                     <Menu.Item as={Link} to='/internships'>
                         Internships
                     </Menu.Item>
+                    <Menu.Item as={Link} to='/projects'>
+                        Projects
+                    </Menu.Item>
+                    <Menu.Item as={Link} to='/search'>
+                        Search
+                    </Menu.Item>
                 </Menu>
             );
         }
