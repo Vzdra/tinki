@@ -6,6 +6,7 @@ import 'semantic-ui-css/semantic.min.css';
 import HeaderComp from '../template/header';
 import './App.css';
 import UserLogin from "../../repository/login_repo";
+import UserJobs from "../data/components/user_jobs";
 
 class App extends Component{
   constructor(props) {
@@ -13,7 +14,8 @@ class App extends Component{
     this.state = {
         logged: false,
         error: null,
-        currentUser: {}
+        currentUser: {
+        }
     }
   }
 
@@ -24,6 +26,7 @@ class App extends Component{
                   <main>
                       <Route path={"/login"} render={() => <Login error={this.state.error} onCompleteForm={this.attemptLogin} loggedIn={this.state.logged}/>}/>
                       <Route path={"/profile"} render={() => <Profile userProfile={this.state.currentUser}/>}/>
+                      <Route path={"/jobs"} render={() => <UserJobs userProfile={this.state.currentUser}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>
               </Router>
