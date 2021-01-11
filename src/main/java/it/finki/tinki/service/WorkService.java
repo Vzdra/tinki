@@ -6,7 +6,6 @@ import it.finki.tinki.model.Work.Project;
 import it.finki.tinki.model.dto.response.work.InternshipResponseDTO;
 import it.finki.tinki.model.dto.response.work.JobResponseDTO;
 import it.finki.tinki.model.dto.response.work.ProjectResponseDTO;
-import it.finki.tinki.model.dto.response.work.WorkResponseDTO;
 import it.finki.tinki.model.enumerator.AccountType;
 
 import java.util.Date;

@@ -39,7 +39,7 @@ public class WorkEditController {
     public InternshipResponseDTO editInternship(@PathVariable Long id,
                                                 @RequestBody InternshipRegisterDTO body){
 
-        if(body.getAccountId().equals(this.workService.getJobById(id).getAccount().getId())){
+        if(body.getAccountId().equals(this.workService.getInternshipById(id).getAccount().getId())){
             Internship k = this.workService.editInternship(id, body.getTitle(), body.getDescription(), body.getSalary(), body.getOpenSpots());
             return new InternshipResponseDTO(k);
         }
@@ -50,7 +50,7 @@ public class WorkEditController {
     public ProjectResponseDTO editProject(@PathVariable Long id,
                                           @RequestBody ProjectRegisterDTO body){
 
-        if(body.getAccountId().equals(this.workService.getJobById(id).getAccount().getId())) {
+        if(body.getAccountId().equals(this.workService.getProjectById(id).getAccount().getId())) {
             Project k = this.workService.editProject(id, body.getTitle(), body.getDescription(), body.getSalary());
             return new ProjectResponseDTO(k);
         }
