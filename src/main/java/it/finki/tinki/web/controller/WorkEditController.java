@@ -24,45 +24,36 @@ public class WorkEditController {
         this.workService = workService;
     }
 
-    @PostMapping("/job/{userId}/{id}")
-    public JobResponseDTO editJob(@PathVariable Long userId,
-                                  @PathVariable Long id,
+    @PostMapping("/job/{id}")
+    public JobResponseDTO editJob(@PathVariable Long id,
                                   @RequestBody JobRegisterDTO body){
 
-        if(userId.equals(this.workService.getJobById(id).getAccount().getId())) {
+        if(body.getAccountId().equals(this.workService.getJobById(id).getAccount().getId())) {
             Job k = this.workService.editJob(id, body.getTitle(), body.getDescription(), body.getSalary());
-
             return new JobResponseDTO(k);
         }
-
         return null;
     }
 
-    @PostMapping("/internship/{userId}/{id}")
-    public InternshipResponseDTO editInternship(@PathVariable Long userId,
-                                                @PathVariable Long id,
+    @PostMapping("/internship/{id}")
+    public InternshipResponseDTO editInternship(@PathVariable Long id,
                                                 @RequestBody InternshipRegisterDTO body){
 
-        if(userId.equals(this.workService.getJobById(id).getAccount().getId())){
+        if(body.getAccountId().equals(this.workService.getJobById(id).getAccount().getId())){
             Internship k = this.workService.editInternship(id, body.getTitle(), body.getDescription(), body.getSalary(), body.getOpenSpots());
-
             return new InternshipResponseDTO(k);
         }
-
         return null;
     }
 
-    @PostMapping("/project/{userId}/{id}")
-    public ProjectResponseDTO editProject(@PathVariable Long userId,
-                                          @PathVariable Long id,
+    @PostMapping("/project/{id}")
+    public ProjectResponseDTO editProject(@PathVariable Long id,
                                           @RequestBody ProjectRegisterDTO body){
 
-        if(userId.equals(this.workService.getJobById(id).getAccount().getId())) {
+        if(body.getAccountId().equals(this.workService.getJobById(id).getAccount().getId())) {
             Project k = this.workService.editProject(id, body.getTitle(), body.getDescription(), body.getSalary());
-
             return new ProjectResponseDTO(k);
         }
-
         return null;
     }
 }

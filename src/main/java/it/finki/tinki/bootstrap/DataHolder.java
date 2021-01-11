@@ -33,7 +33,7 @@ public class DataHolder {
 
     @PostConstruct
     public void init(){
-        if(skillRepository.findAll().size()==0){
+        if(this.skillRepository.findAll().size()==0){
             Skill s1 = new Skill("C++");
             Skill s2 = new Skill("Java");
             Skill s3 = new Skill("Python");
@@ -45,38 +45,37 @@ public class DataHolder {
             Skill s9 = new Skill("NodeJs");
             Skill s0 = new Skill("Go");
 
-            skillRepository.save(s1);
-            skillRepository.save(s2);
-            skillRepository.save(s3);
-            skillRepository.save(s4);
-            skillRepository.save(s5);
-            skillRepository.save(s6);
-            skillRepository.save(s7);
-            skillRepository.save(s8);
-            skillRepository.save(s9);
-            skillRepository.save(s0);
+            this.skillRepository.save(s1);
+            this.skillRepository.save(s2);
+            this.skillRepository.save(s3);
+            this.skillRepository.save(s4);
+            this.skillRepository.save(s5);
+            this.skillRepository.save(s6);
+            this.skillRepository.save(s7);
+            this.skillRepository.save(s8);
+            this.skillRepository.save(s9);
+            this.skillRepository.save(s0);
         }
 
         List<Skill> lista;
-        lista = skillRepository.findAll();
+        lista = this.skillRepository.findAll();
 
         List<Skill> l2 = new ArrayList<>();
-        l2.add(skillRepository.getOne(3L));
-        l2.add(skillRepository.getOne(10L));
-        l2.add(skillRepository.getOne(1L));
-        l2.add(skillRepository.getOne(2L));
-        l2.add(skillRepository.getOne(4L));
-        l2.add(skillRepository.getOne(5L));
-        l2.add(skillRepository.getOne(6L));
-        l2.add(skillRepository.getOne(7L));
+        l2.add(this.skillRepository.findById(3L).get());
+        l2.add(this.skillRepository.findById(2L).get());
+        l2.add(this.skillRepository.findById(4L).get());
+        l2.add(this.skillRepository.findById(7L).get());
+        l2.add(this.skillRepository.findById(1L).get());
+        l2.add(this.skillRepository.findById(5L).get());
+        l2.add(this.skillRepository.findById(9L).get());
+        l2.add(this.skillRepository.findById(6L).get());
 
 
         List<Skill> l3 = new ArrayList<>();
-        l3.add(skillRepository.getOne(3L));
-        l3.add(skillRepository.getOne(10L));
-        l3.add(skillRepository.getOne(5L));
-        l3.add(skillRepository.getOne(6L));
-        l3.add(skillRepository.getOne(7L));
+        l3.add(this.skillRepository.findById(3L).get());
+        l3.add(this.skillRepository.findById(2L).get());
+        l3.add(this.skillRepository.findById(4L).get());
+        l3.add(this.skillRepository.findById(7L).get());
 
         List<Long> ids = new ArrayList<>();
         lista.forEach(item -> {
@@ -93,15 +92,15 @@ public class DataHolder {
             sm2.add(item.getId());
         });
 
-        Account c = this.accountService.registerCompany("asdf@asdf", "pass", "Co.co", "Macedonia", "Skopje", "Pero Nakov");
-        Account m = this.accountService.registerTeam("asdf", "asd", "TeamRocket", 3);
+        Account c = this.accountService.registerCompany("company@company", "company", "Co.co", "Macedonia", "Skopje", "Pero Nakov");
+        Account m = this.accountService.registerTeam("team@team", "team", "TeamRocket", 3);
 
-        Job z = this.workService.insertJob("asdfq", "asdfqw", m.getId() ,5000, smalls, AccountType.TEAM);
-        Job n = this.workService.insertJob("asdfq", "asdfqw", c.getId() ,5000, sm2, AccountType.COMPANY);
-        Job j = this.workService.insertJob("Asdf", "Asdfa", c.getId() ,5000, ids, AccountType.COMPANY);
-        Job k = this.workService.insertJob("Asdf", "Asdfa", m.getId() ,5000, ids, AccountType.TEAM);
+        this.workService.insertJob("asdfq", "asdfqw", m.getId() ,5000, smalls, AccountType.TEAM);
+        this.workService.insertJob("asdfq", "asdfqw", c.getId() ,5000, sm2, AccountType.COMPANY);
+        this.workService.insertJob("Asdf", "Asdfa", c.getId() ,5000, ids, AccountType.COMPANY);
+        this.workService.insertJob("Asdf", "Asdfa", m.getId() ,5000, ids, AccountType.TEAM);
 
-        Account u = this.accountService.registerUser("asdf", "asdfq", "Zoki", "Poki", lista, lista);
+        this.accountService.registerUser("user@user", "user", "Zoki", "Poki", l3, lista);
 
     }
 

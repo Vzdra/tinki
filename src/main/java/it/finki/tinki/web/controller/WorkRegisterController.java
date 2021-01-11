@@ -25,28 +25,22 @@ public class WorkRegisterController {
 
     @PostMapping("/job")
     public JobResponseDTO registerJob(@RequestBody JobRegisterDTO body){
-
         Job j = this.workService.insertJob(body.getTitle(),
                 body.getDescription(), body.getAccountId(), body.getSalary(), body.getSkillsRequired(), body.getType());
-
         return new JobResponseDTO(j);
     }
 
     @PostMapping("/internship")
     public InternshipResponseDTO registerInternship(@RequestBody InternshipRegisterDTO body){
-
         Internship j = this.workService.insertInternship(body.getTitle(),
                 body.getDescription(), body.getAccountId(), body.getSalary(), body.getSkillsTrained(), body.getOpenSpots(), body.getType());
-
         return new InternshipResponseDTO(j);
     }
 
     @PostMapping("/project")
     public ProjectResponseDTO registerProject(@RequestBody ProjectRegisterDTO body){
-
         Project j = this.workService.insertProject(body.getTitle(),
                 body.getDescription(), body.getAccountId(), body.getSalary(), body.getSkillsRequired(), body.getValidUntil(), body.getType());
-
         return new ProjectResponseDTO(j);
     }
 }

@@ -15,6 +15,7 @@ public class CompanyResponseDTO extends LoginResponseDTO {
     private List<InternshipResponseDTO> internships;
 
     public CompanyResponseDTO(){
+        super();
         this.jobs = new ArrayList<>();
         this.internships = new ArrayList<>();
     }

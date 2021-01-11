@@ -37,9 +37,7 @@ public class AccountRegisterController {
 
         List<Skill> retained = this.skillService.returnSkillsBasedOnId(body.getRetainedSkills());
         List<Skill> toLearn = this.skillService.returnSkillsBasedOnId(body.getSkillsToLearn());
-
         Account k = this.accountService.registerUser(body.getEmail(), body.getPassword(), body.getName(), body.getSurname(), retained, toLearn);
-
         Map<String, String> response = new HashMap<>();
 
         if(k==null){
@@ -55,7 +53,6 @@ public class AccountRegisterController {
     private Map<String, String> registerTeam(@RequestBody TeamRegisterDTO body){
 
         Account k = this.accountService.registerTeam(body.getEmail(), body.getPassword(), body.getName(), body.getMembers());
-
         Map<String, String> response = new HashMap<>();
 
         if(k==null){
@@ -72,7 +69,6 @@ public class AccountRegisterController {
 
         Account k = this.accountService.registerCompany(body.getEmail(),
                 body.getPassword(), body.getName(), body.getCountry(), body.getCity(), body.getStreet());
-
         Map<String, String> response = new HashMap<>();
 
         if(k==null){

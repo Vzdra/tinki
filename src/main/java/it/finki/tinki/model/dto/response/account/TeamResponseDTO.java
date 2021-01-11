@@ -14,6 +14,7 @@ public class TeamResponseDTO extends LoginResponseDTO {
     private List<ProjectResponseDTO> projects;
 
     public TeamResponseDTO(){
+        super();
         this.jobs = new ArrayList<>();
         this.projects = new ArrayList<>();
     }
