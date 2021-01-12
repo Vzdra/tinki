@@ -1,7 +1,7 @@
 import {Container} from "semantic-ui-react";
 import {Redirect} from "react-router-dom";
 import React from "react";
-import Internships from "./item_components/internship_component";
+import Internships from "../item_components/internship_component";
 
 const UserInternships = (props) =>{
     if(props.userProfile.type==="USER"){

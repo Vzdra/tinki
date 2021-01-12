@@ -1,18 +1,18 @@
 import React from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import { Container, Card, Button } from 'semantic-ui-react';
-import Projects from "./item_components/project_component";
+import Jobs from '../item_components/job_component';
 
 
-const TeamProjects = (props) =>{
+const TeamJobs = (props) =>{
     if(props.userProfile.type==="TEAM"){
         if(props.userProfile.email!=null){
             return(
                 <Container textAlign="left">
-                    <Button as={Link} to={"/project/add"} primary>Add</Button>
+                    <Button as={Link} to={"/job/add"} primary>Add</Button>
                     <h1>Registered Jobs:</h1>
-                    {props.userProfile.projects.map(item =>{
-                        return <Projects
+                    {props.userProfile.jobs.map(item =>{
+                        return <Jobs
                             name={item.name}
                             description={item.description}
                             accountName={item.accountName}
@@ -31,4 +31,4 @@ const TeamProjects = (props) =>{
     );
 }
 
-export default TeamProjects;
+export default TeamJobs;

@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import { Container, Card, Button } from 'semantic-ui-react';
-import Jobs from '../components/item_components/job_component';
+import Jobs from '../item_components/job_component';
 
 
-const TeamJobs = (props) =>{
-    if(props.userProfile.type==="TEAM"){
+const CompanyJobs = (props) =>{
+    if(props.userProfile.type==="COMPANY"){
         if(props.userProfile.email!=null){
             return(
                 <Container textAlign="left">
@@ -31,4 +31,4 @@ const TeamJobs = (props) =>{
     );
 }
 
-export default TeamJobs;
+export default CompanyJobs;

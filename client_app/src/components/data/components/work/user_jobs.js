@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Container, Card } from 'semantic-ui-react';
-import Jobs from '../components/item_components/job_component';
+import Jobs from '../item_components/job_component';
 
 
 const UserJobs = (props) =>{

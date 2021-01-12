@@ -1,7 +1,7 @@
 import {Card, Container} from "semantic-ui-react";
 import {Redirect} from "react-router-dom";
 import React from "react";
-import Projects from "./item_components/project_component";
+import Projects from "../item_components/project_component";
 
 const UserProjects = (props) =>{
     if(props.userProfile.type==="USER"){
