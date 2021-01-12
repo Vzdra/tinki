@@ -13,6 +13,7 @@ import CompanyJobs from "../work/company_jobs";
 import TeamProjects from "../work/team_projects";
 import TeamJobs from "../work/team_jobs";
 import CompanyInternships from "../work/company_internships";
+import UserRegister from "../../repository/register_repo";
 
 class App extends Component{
   constructor(props) {
@@ -75,6 +76,12 @@ class App extends Component{
               });
           }
       });
+
+
+
+      registerUser = () =>{
+          UserRegister.userRegister()
+      }
 
       if(this.state.currentUser.email!=null){
           return <Redirect to={"/profile"}/>;

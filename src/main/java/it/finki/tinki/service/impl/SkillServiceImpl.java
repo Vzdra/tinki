@@ -32,4 +32,9 @@ public class SkillServiceImpl implements SkillService {
     public List<Skill> returnBasedOnText(String text){
         return this.skillRepository.findAllByNameContaining(text);
     }
+
+    @Override
+    public List<Skill> findAll() {
+        return this.skillRepository.findAll();
+    }
 }
