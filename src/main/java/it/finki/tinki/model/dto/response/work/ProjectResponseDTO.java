@@ -15,7 +15,7 @@ public class ProjectResponseDTO extends WorkResponseDTO {
     List<Skill> skillsRequired;
 
     public ProjectResponseDTO(){
-        super();
+        super("Project!");
     }
 
     public ProjectResponseDTO(Project project){

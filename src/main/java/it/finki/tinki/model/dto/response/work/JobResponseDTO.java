@@ -17,7 +17,7 @@ public class JobResponseDTO extends WorkResponseDTO {
     List<Skill> skillsRequired;
 
     public JobResponseDTO(){
-        super();
+        super("Job!");
     }
 
     public JobResponseDTO(Job job){

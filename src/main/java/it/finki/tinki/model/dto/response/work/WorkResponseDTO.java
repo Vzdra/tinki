@@ -15,8 +15,10 @@ public class WorkResponseDTO {
     AccountType accountType;
     String error;
 
-    WorkResponseDTO(){
-        this.error = "Error registering job!";
+    WorkResponseDTO(){}
+
+    WorkResponseDTO(String item){
+        this.error = "Error registering " + item;
     }
 
     WorkResponseDTO(Long id, String title, String description, int salary, Account account){

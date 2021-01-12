@@ -16,7 +16,7 @@ public class InternshipResponseDTO extends WorkResponseDTO {
     List<Skill> skillsTrained;
 
     public InternshipResponseDTO(){
-        super();
+        super("Internship!");
     }
 
     public InternshipResponseDTO(Internship internship){
