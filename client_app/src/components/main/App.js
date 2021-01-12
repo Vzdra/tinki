@@ -7,6 +7,9 @@ import HeaderComp from '../template/header';
 import './App.css';
 import UserLogin from "../../repository/login_repo";
 import UserJobs from "../data/components/user_jobs";
+import UserInternships from "../data/components/user_internships";
+import UserProjects from "../data/components/user_projects";
+import CompanyJobs from "../data/components/company_jobs";
 
 class App extends Component{
   constructor(props) {
@@ -22,16 +25,36 @@ class App extends Component{
   render(){
           return(
               <Router>
-                  <HeaderComp acc={this.state.currentUser.email} accType={this.state.currentUser.type} name={this.state.currentUser.name}/>
+                  <HeaderComp acc={this.state.currentUser.email} accType={this.state.currentUser.type} name={this.state.currentUser.name} removeState={this.removeState}/>
                   <main>
-                      <Route path={"/login"} render={() => <Login error={this.state.error} onCompleteForm={this.attemptLogin} loggedIn={this.state.logged}/>}/>
-                      <Route path={"/profile"} render={() => <Profile userProfile={this.state.currentUser}/>}/>
-                      <Route path={"/jobs"} render={() => <UserJobs userProfile={this.state.currentUser}/>}/>
+                      <Route path={"/login"} render={() => <Login error={this.state.error} onCompleteForm={this.attemptLogin} loggedIn={this.state.logged}/>} />
+                      <Route path={"/profile"} render={() => <Profile userProfile={this.state.currentUser}/>} />
+                      <Route path={"/user/jobs"} render={() => <UserJobs userProfile={this.state.currentUser}/>} />
+                      <Route path={"/user/internships"} render={() => <UserInternships userProfile={this.state.currentUser}/>} />
+                      <Route path={"/user/projects"} render={() => <UserProjects userProfile={this.state.currentUser}/>} />
+                      <Route path={"/team/jobs"} />
+                      <Route path={"/team/projects"} />
+                      <Route path={"/company/jobs"} render={() => <CompanyJobs userProfile={this.state.currentUser} />}/>
+                      <Route path={"/company/internships"}/>
+                      <Route path={"/profile/edit"} />
+                      <Route path={"/job/edit"} />
+                      <Route path={"/internship/edit"}/>
+                      <Route path={"/project/edit"} />
+                      <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>
               </Router>
           );
   }
+
+  removeState = () => {
+      this.setState({
+          logged: false,
+          error: null,
+          currentUser: {}
+      })
+  }
+
 
   attemptLogin = (email, password, type) => {
       UserLogin.login(email, password, type).then((res) =>{

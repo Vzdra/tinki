@@ -30,7 +30,7 @@ const Login = (props) => {
             <Container>
                 <h1 style={{color: "red"}}>{props.error}</h1>
                 <Form onSubmit={onFormSubmit}>
-                    <Form.Input id="email" name="email" type='text' required fluid label='E-mail' placeholder='Enter e-mail.' onChange={handleCheck} />
+                    <Form.Input id="email" name="email" type='email' required fluid label='E-mail' placeholder='Enter e-mail.' onChange={handleCheck} />
                     <Form.Input id="password" name="password" type='password' required fluid label='Password' placeholder='Enter password.' onChange={handleCheck} />
                     <Form.Field
                         control={Checkbox}
