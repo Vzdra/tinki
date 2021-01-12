@@ -42,7 +42,7 @@ const HeaderComp = (props) => {
         }else if(props.accType==="TEAM"){
             return(
                 <Menu inverted>
-                    <Menu.Item position="right" as={Link} to='/profile'>
+                    <Menu.Item as={Link} to='/profile'>
                         Profile
                     </Menu.Item>
                     <Menu.Item as={Link} to='/team/jobs'>

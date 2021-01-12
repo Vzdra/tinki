@@ -13,7 +13,7 @@ const TeamProjects = (props) =>{
                     <h1>Registered Jobs:</h1>
                     {props.userProfile.projects.map(item =>{
                         return <Projects
-                            name={item.name}
+                            title={item.title}
                             description={item.description}
                             accountName={item.accountName}
                             accountEmail={item.accountEmail}

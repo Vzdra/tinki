@@ -13,7 +13,7 @@ const CompanyInternships = (props) =>{
                     <h1>Registered Jobs:</h1>
                     {props.userProfile.internships.map(item =>{
                         return <Internships
-                            name={item.name}
+                            title={item.title}
                             description={item.description}
                             accountName={item.accountName}
                             accountEmail={item.accountEmail}
