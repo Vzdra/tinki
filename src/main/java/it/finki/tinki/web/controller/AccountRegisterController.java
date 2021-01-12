@@ -6,9 +6,7 @@ import it.finki.tinki.model.dto.register.account.CompanyRegisterDTO;
 import it.finki.tinki.model.dto.register.account.TeamRegisterDTO;
 import it.finki.tinki.model.dto.register.account.UserRegisterDTO;
 import it.finki.tinki.service.AccountService;
-import it.finki.tinki.service.MatchmakerService;
 import it.finki.tinki.service.SkillService;
-import it.finki.tinki.service.WorkService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -22,14 +20,10 @@ public class AccountRegisterController {
 
     AccountService accountService;
     SkillService skillService;
-    WorkService workService;
-    MatchmakerService matchmakerService;
 
-    public AccountRegisterController(AccountService accountService, SkillService skillService, WorkService workService, MatchmakerService matchmakerService) {
+    public AccountRegisterController(AccountService accountService, SkillService skillService) {
         this.accountService = accountService;
         this.skillService = skillService;
-        this.workService = workService;
-        this.matchmakerService = matchmakerService;
     }
 
     @RequestMapping(path = "/user", method = RequestMethod.POST)

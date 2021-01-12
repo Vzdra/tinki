@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface MatchRepository extends JpaRepository<Match, EmbeddedMatchId> {
     List<Match> findAllByEmbeddedMatchIdUserAndTypeOrderByCoefficientDesc(User user, WorkType type);
+    List<Match> deleteAllByEmbeddedMatchId_User_Id(Long userId);
 }

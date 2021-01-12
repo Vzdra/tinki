@@ -16,6 +16,7 @@ import it.finki.tinki.repository.ProjectRepository;
 import it.finki.tinki.service.MatchmakerService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,10 +118,15 @@ public class MatchmakerServiceImpl implements MatchmakerService {
 
         if(coef!=0){
             EmbeddedMatchId embeddedMatchId = new EmbeddedMatchId(internship, user);
-            Match m = new Match(embeddedMatchId, coef, WorkType.PROJECT);
+            Match m = new Match(embeddedMatchId, coef, WorkType.INTERNSHIP);
             this.matchRepository.save(m);
         }
     }
 
+    @Transactional
+    @Override
+    public List<Match> removeByUserId(Long userId) {
+        return this.matchRepository.deleteAllByEmbeddedMatchId_User_Id(userId);
+    }
 
 }

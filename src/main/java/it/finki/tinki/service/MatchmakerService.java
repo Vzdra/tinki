@@ -1,5 +1,6 @@
 package it.finki.tinki.service;
 
+import it.finki.tinki.model.Match;
 import it.finki.tinki.model.Work.Internship;
 import it.finki.tinki.model.Work.Job;
 import it.finki.tinki.model.Work.Project;
@@ -14,4 +15,5 @@ public interface MatchmakerService {
     void setUpUserJobMatches(Job job, User user);
     void setUpUserProjectMatches(Project project, User user);
     void setUpUserInternshipMatches(Internship internship, User user);
+    List<Match> removeByUserId(Long userId);
 }

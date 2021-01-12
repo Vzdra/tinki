@@ -10,7 +10,9 @@ import it.finki.tinki.service.WorkService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -60,47 +62,52 @@ public class DataHolder {
         List<Skill> lista;
         lista = this.skillRepository.findAll();
 
-        List<Skill> l2 = new ArrayList<>();
-        l2.add(this.skillRepository.findById(3L).get());
-        l2.add(this.skillRepository.findById(2L).get());
-        l2.add(this.skillRepository.findById(4L).get());
-        l2.add(this.skillRepository.findById(7L).get());
-        l2.add(this.skillRepository.findById(1L).get());
-        l2.add(this.skillRepository.findById(5L).get());
-        l2.add(this.skillRepository.findById(9L).get());
-        l2.add(this.skillRepository.findById(6L).get());
+        List<Skill> lista2 = new ArrayList<>();
+        lista2.add(this.skillRepository.findById(3L).get());
+        lista2.add(this.skillRepository.findById(2L).get());
+        lista2.add(this.skillRepository.findById(4L).get());
+        lista2.add(this.skillRepository.findById(7L).get());
+        lista2.add(this.skillRepository.findById(1L).get());
+        lista2.add(this.skillRepository.findById(5L).get());
+        lista2.add(this.skillRepository.findById(9L).get());
+        lista2.add(this.skillRepository.findById(6L).get());
 
 
-        List<Skill> l3 = new ArrayList<>();
-        l3.add(this.skillRepository.findById(3L).get());
-        l3.add(this.skillRepository.findById(2L).get());
-        l3.add(this.skillRepository.findById(4L).get());
-        l3.add(this.skillRepository.findById(7L).get());
+        List<Skill> lista3 = new ArrayList<>();
+        lista3.add(this.skillRepository.findById(3L).get());
+        lista3.add(this.skillRepository.findById(2L).get());
+        lista3.add(this.skillRepository.findById(4L).get());
+        lista3.add(this.skillRepository.findById(7L).get());
 
-        List<Long> ids = new ArrayList<>();
+        List<Long> allSkills = new ArrayList<>();
         lista.forEach(item -> {
-            ids.add(item.getId());
+            allSkills.add(item.getId());
         });
 
-        List<Long> smalls = new ArrayList<>();
-        l2.forEach(item -> {
-            smalls.add(item.getId());
+        List<Long> skills8 = new ArrayList<>();
+        lista2.forEach(item -> {
+            skills8.add(item.getId());
         });
 
-        List<Long> sm2 = new ArrayList<>();
-        l3.forEach(item -> {
-            sm2.add(item.getId());
+        List<Long> skills4 = new ArrayList<>();
+        lista3.forEach(item -> {
+            skills4.add(item.getId());
         });
 
-        Account c = this.accountService.registerCompany("company@company", "company", "Co.co", "Macedonia", "Skopje", "Pero Nakov");
+        Account c = this.accountService.registerCompany("company@company", "company", "Co.Co", "Macedonia", "Skopje", "Pero Nakov");
+        Account ct = this.accountService.registerCompany("company@co", "company", "Co.Co", "Macedonia", "Skopje", "Pero Nakov");
         Account m = this.accountService.registerTeam("team@team", "team", "TeamRocket", 3);
 
-        this.workService.insertJob("asdfq", "asdfqw", m.getId() ,5000, smalls, AccountType.TEAM);
-        this.workService.insertJob("asdfq", "asdfqw", c.getId() ,5000, sm2, AccountType.COMPANY);
-        this.workService.insertJob("Asdf", "Asdfa", c.getId() ,5000, ids, AccountType.COMPANY);
-        this.workService.insertJob("Asdf", "Asdfa", m.getId() ,5000, ids, AccountType.TEAM);
+        this.workService.insertJob("Team Job 1", "Team job 1 requires 3 members!", m.getId() ,1515, allSkills, AccountType.TEAM);
+        this.workService.insertJob("Team Job 2", "Team job 2 requires 2 members!", m.getId() ,5511, skills4, AccountType.TEAM);
+        this.workService.insertJob("Company Job 1", "Company job 1 requires 3 members!", c.getId() ,12345, allSkills, AccountType.COMPANY);
+        this.workService.insertJob("Company Job 2", "Company job 2 requires 3 members!", ct.getId() ,8901, skills8, AccountType.COMPANY);
+        this.workService.insertInternship("Internship 1", "Opportunity to learn new things!", c.getId() ,5000, skills4, 6, AccountType.COMPANY);
+        this.workService.insertInternship("Internship 2", "Opportunity to learn new things!", c.getId() ,5000, allSkills, 3, AccountType.COMPANY);
+        this.workService.insertProject("Project 1", "Project that lasts few days!", m.getId() ,5000, skills8, new Date(), AccountType.TEAM);
+        this.workService.insertProject("Project 2", "Project that ends soon!", m.getId() ,5000, skills4, new Date(), AccountType.TEAM);
 
-        this.accountService.registerUser("user@user", "user", "Zoki", "Poki", l3, lista);
+        this.accountService.registerUser("user@user", "user", "Zoki", "Poki", lista3, lista);
 
     }
 

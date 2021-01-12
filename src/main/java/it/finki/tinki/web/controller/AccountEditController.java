@@ -34,11 +34,12 @@ public class AccountEditController {
         this.builderService = builderService;
     }
 
-    @PostMapping(path = "/user/{id}")
+    @PostMapping(path = "/user/{id}/{email}")
     public UserResponseDTO editUser(@PathVariable(name = "id") Long id,
+                                    @PathVariable(name = "email") String email,
                                     @RequestBody UserRegisterDTO body){
 
-        Optional<?> a = this.accountService.findByIdAndEmail(id, body.getEmail(), AccountType.USER);
+        Optional<?> a = this.accountService.findByIdAndEmail(id, email, AccountType.USER);
 
         if(a.isPresent()){
             List<Skill> retained = this.skillService.returnSkillsBasedOnId(body.getRetainedSkills());
@@ -50,11 +51,12 @@ public class AccountEditController {
         return new UserResponseDTO();
     }
 
-    @PostMapping(path = "/company/{id}")
+    @PostMapping(path = "/company/{id}/{email}")
     public CompanyResponseDTO editCompany(@PathVariable(name = "id") Long id,
+                                          @PathVariable(name = "email") String email,
                                           @RequestBody CompanyRegisterDTO body){
 
-        Optional<?> a = this.accountService.findByIdAndEmail(id, body.getEmail(), AccountType.COMPANY);
+        Optional<?> a = this.accountService.findByIdAndEmail(id, email, AccountType.COMPANY);
 
         if(a.isPresent()){
             Company c = this.accountService.editCompany(id, body.getEmail(), body.getName(), body.getCountry(), body.getCity(), body.getStreet());
@@ -64,11 +66,12 @@ public class AccountEditController {
         return new CompanyResponseDTO();
     }
 
-    @PostMapping(path = "/team/{id}")
+    @PostMapping(path = "/team/{id}/{email}")
     public TeamResponseDTO editTeam(@PathVariable(name = "id") Long id,
+                                    @PathVariable(name = "email") String email,
                                     @RequestBody TeamRegisterDTO body){
 
-        Optional<?> a = this.accountService.findByIdAndEmail(id, body.getEmail(), AccountType.TEAM);
+        Optional<?> a = this.accountService.findByIdAndEmail(id, email, AccountType.TEAM);
 
         if(a.isPresent()){
             Team t = this.accountService.editTeam(id, body.getEmail(), body.getName(), body.getMembers());

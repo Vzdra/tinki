@@ -213,6 +213,9 @@ public class AccountServiceImpl implements AccountService {
 
 
     private void setUpUser(User u){
+
+        this.matchmakerService.removeByUserId(u.getId());
+
         List<Job> jobs = this.jobRepository.findAll();
         List<Project> projects = this.projectRepository.findAll();
         List<Internship> internships = this.internshipRepository.findAll();
