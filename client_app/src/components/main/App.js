@@ -10,6 +10,9 @@ import UserJobs from "../data/components/user_jobs";
 import UserInternships from "../data/components/user_internships";
 import UserProjects from "../data/components/user_projects";
 import CompanyJobs from "../data/components/company_jobs";
+import TeamProjects from "../data/components/team_projects";
+import TeamJobs from "../data/components/team_jobs";
+import CompanyInternships from "../data/components/company_internships";
 
 class App extends Component{
   constructor(props) {
@@ -32,10 +35,10 @@ class App extends Component{
                       <Route path={"/user/jobs"} render={() => <UserJobs userProfile={this.state.currentUser}/>} />
                       <Route path={"/user/internships"} render={() => <UserInternships userProfile={this.state.currentUser}/>} />
                       <Route path={"/user/projects"} render={() => <UserProjects userProfile={this.state.currentUser}/>} />
-                      <Route path={"/team/jobs"} render={() => <CompanyJobs userProfile={this.state.currentUser} />}/>
-                      <Route path={"/team/projects"} />
+                      <Route path={"/team/jobs"} render={() => <TeamJobs userProfile={this.state.currentUser} />}/>
+                      <Route path={"/team/projects"} render={() => <TeamProjects userProfile={this.state.currentUser} />}/>
                       <Route path={"/company/jobs"} render={() => <CompanyJobs userProfile={this.state.currentUser} />}/>
-                      <Route path={"/company/internships"}/>
+                      <Route path={"/company/internships"} render={() => <CompanyInternships userProfile={this.state.currentUser}/>} />
                       <Route path={"/profile/edit"} />
                       <Route path={"/job/edit"} />
                       <Route path={"/internship/edit"}/>
