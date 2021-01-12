@@ -1,8 +1,8 @@
 import React from 'react';
-import UserDetails from "./components/profiles/user_profile";
+import UserDetails from "./user_profile";
 import { Redirect } from "react-router-dom";
-import CompanyProfile from "./components/profiles/company_profile";
-import TeamProfile from "./components/profiles/team_profile";
+import CompanyProfile from "./company_profile";
+import TeamProfile from "./team_profile";
 
 const Profile = (props) => {
 

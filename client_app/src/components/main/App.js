@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import Login from '../login/login';
-import Profile from "../data/profile";
+import Profile from "../profiles/profile";
 import 'semantic-ui-css/semantic.min.css';
 import HeaderComp from '../template/header';
 import './App.css';
 import UserLogin from "../../repository/login_repo";
-import UserJobs from "../data/components/work/user_jobs";
-import UserInternships from "../data/components/work/user_internships";
-import UserProjects from "../data/components/work/user_projects";
-import CompanyJobs from "../data/components/work/company_jobs";
-import TeamProjects from "../data/components/work/team_projects";
-import TeamJobs from "../data/components/work/team_jobs";
-import CompanyInternships from "../data/components/work/company_internships";
+import UserJobs from "../work/user_jobs";
+import UserInternships from "../work/user_internships";
+import UserProjects from "../work/user_projects";
+import CompanyJobs from "../work/company_jobs";
+import TeamProjects from "../work/team_projects";
+import TeamJobs from "../work/team_jobs";
+import CompanyInternships from "../work/company_internships";
 
 class App extends Component{
   constructor(props) {
