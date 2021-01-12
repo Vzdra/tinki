@@ -32,7 +32,7 @@ class App extends Component{
                       <Route path={"/user/jobs"} render={() => <UserJobs userProfile={this.state.currentUser}/>} />
                       <Route path={"/user/internships"} render={() => <UserInternships userProfile={this.state.currentUser}/>} />
                       <Route path={"/user/projects"} render={() => <UserProjects userProfile={this.state.currentUser}/>} />
-                      <Route path={"/team/jobs"} />
+                      <Route path={"/team/jobs"} render={() => <CompanyJobs userProfile={this.state.currentUser} />}/>
                       <Route path={"/team/projects"} />
                       <Route path={"/company/jobs"} render={() => <CompanyJobs userProfile={this.state.currentUser} />}/>
                       <Route path={"/company/internships"}/>
