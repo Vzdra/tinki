@@ -1,4 +1,4 @@
-import {Card, Container} from "semantic-ui-react";
+import {Container} from "semantic-ui-react";
 import {Redirect} from "react-router-dom";
 import React from "react";
 import Internships from "./item_components/internship_component";

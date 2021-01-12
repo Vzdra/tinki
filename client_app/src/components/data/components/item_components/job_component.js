@@ -2,7 +2,6 @@ import React from 'react';
 import {Header, List, Segment, Button} from 'semantic-ui-react';
 
 const Jobs = (props) => {
-
     return(
         <Segment>
             <Header as="h3">{props.title}</Header>

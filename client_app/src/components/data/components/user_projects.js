@@ -1,25 +1,24 @@
 import {Card, Container} from "semantic-ui-react";
 import {Redirect} from "react-router-dom";
 import React from "react";
+import Projects from "./item_components/project_component";
 
 const UserProjects = (props) =>{
-    var itemsArray = [];
-
     if(props.userProfile.type==="USER"){
         if(props.userProfile.email!=null){
-            props.userProfile.projects.forEach(item => {
-                let obj = {}
-                obj.header = item.title;
-                obj.description = item.description + "\n" + item.accountEmail + " for contact!";
-                obj.meta = "Team: " + item.accountName + " / Salary: " + item.salary;
-
-                itemsArray.push(obj);
-            });
-
             return(
-                <Container textAlign="left">
+                <Container>
                     <h1>Projects for you!</h1>
-                    <Card.Group items={itemsArray} />
+                    {props.userProfile.projects.map(item =>{
+                        return <Projects
+                            title={item.title}
+                            description={item.description}
+                            accountName={item.accountName}
+                            accountEmail={item.accountEmail}
+                            skills={item.skillsRequired}
+                            type={props.userProfile.type}
+                        />})
+                    }
                 </Container>
             );
         }

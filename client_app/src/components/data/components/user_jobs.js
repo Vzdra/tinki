@@ -5,8 +5,6 @@ import Jobs from '../components/item_components/job_component';
 
 
 const UserJobs = (props) =>{
-    var itemsArray = [];
-
     if(props.userProfile.type==="USER"){
         if(props.userProfile.email!=null){
             return(
