@@ -6,13 +6,13 @@ import 'semantic-ui-css/semantic.min.css';
 import HeaderComp from '../template/header';
 import './App.css';
 import UserLogin from "../../repository/login_repo";
-import UserJobs from "../data/components/user_jobs";
-import UserInternships from "../data/components/user_internships";
-import UserProjects from "../data/components/user_projects";
-import CompanyJobs from "../data/components/company_jobs";
-import TeamProjects from "../data/components/team_projects";
-import TeamJobs from "../data/components/team_jobs";
-import CompanyInternships from "../data/components/company_internships";
+import UserJobs from "../data/components/work/user_jobs";
+import UserInternships from "../data/components/work/user_internships";
+import UserProjects from "../data/components/work/user_projects";
+import CompanyJobs from "../data/components/work/company_jobs";
+import TeamProjects from "../data/components/work/team_projects";
+import TeamJobs from "../data/components/work/team_jobs";
+import CompanyInternships from "../data/components/work/company_internships";
 
 class App extends Component{
   constructor(props) {
