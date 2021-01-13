@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button, Checkbox, Container, Form } from "semantic-ui-react";
+import 'semantic-ui-react';
+import {Button, Container, Form} from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 import SkillFetch from "../../repository/skill_repo";
 import UserRegister from "../../repository/register_repo";
+import {Component} from "react/cjs/react.production.min";
 
 class RegisterUser extends Component {
     constructor(props) {
@@ -20,16 +22,32 @@ class RegisterUser extends Component {
         }
     }
 
+    handleCheck = (e, {value}) => {
+        this.setState({
+            ...this.state,
+            [e.target.name]: value
+        })
+    }
+
     render() {
         return (
             <Container>
                 <h1 style={{color: "red"}}>{this.state.error}</h1>
                 <Form onSubmit={this.attemptRegister}>
                     <Form.Input id="email" name="email" type='email' required fluid label='E-mail'
-                                placeholder='Enter e-mail.' onChange={handleCheck}/>
+                                placeholder='Enter e-mail.' onChange={this.handleCheck}/>
                     <Form.Input id="password" name="password" type='password' required fluid label='Password'
-                                placeholder='Enter password.' onChange={handleCheck}/>
-                                
+                                placeholder='Enter password.' onChange={this.handleCheck}/>
+                    <Form.Input id="name" name="name" type='text' required fluid label='Name'
+                                placeholder='Enter name.' onChange={this.handleCheck}/>
+                    <Form.Input id="surname" name="surname" type='text' required fluid label='Surname'
+                                placeholder='Enter surname.' onChange={this.handleCheck}/>
+                                <label>Skills you know:</label>
+                    <select multiple="" class="ui dropdown">
+                        {this.state.allSkills.map(item => {
+                            return <option value={item.id}>{item.name}</option>
+                        })}
+                    </select>
                     <Button type="submit">Register</Button>
                 </Form>
             </Container>
@@ -39,7 +57,7 @@ class RegisterUser extends Component {
     componentDidMount(){
         SkillFetch.fetchAll().then((data) =>{
             this.setState({
-                allSkills: data
+                allSkills: data.data
             })
         })
     }
