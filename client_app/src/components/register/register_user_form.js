@@ -1,6 +1,6 @@
 import React from 'react';
 import 'semantic-ui-react';
-import {Button, Container, Form} from "semantic-ui-react";
+import {Button, Container, Dropdown, Form, Label} from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 import SkillFetch from "../../repository/skill_repo";
 import UserRegister from "../../repository/register_repo";
@@ -17,9 +17,11 @@ class RegisterUser extends Component {
             surname: "",
             retainedSkills: [],
             skillsToLearn: [],
-            allSkills: [],
-            error: props.error
+            error: props.error,
+            success: props.success,
+            sortedOptions:[]
         }
+        this.attemptRegister = this.attemptRegister.bind(this);
     }
 
     handleCheck = (e, {value}) => {
@@ -29,7 +31,55 @@ class RegisterUser extends Component {
         })
     }
 
+    setKnown = (e, {value}) =>{
+        this.setState({
+            retainedSkills: value
+        })
+    }
+
+    setToKnow = (e, {value}) =>{
+        this.setState({
+            skillsToLearn: value
+        })
+    }
+
+    attemptRegister(){
+        UserRegister.userRegister(
+            this.state.email,
+            this.state.password,
+            this.state.name,
+            this.state.surname,
+            this.state.retainedSkills,
+            this.state.skillsToLearn
+        ).then(res => {
+            if(res.data.success!=null){
+                this.setState({
+                    success: res.data.success,
+                    error: null
+                })
+            }else{
+                this.setState({
+                    error: res.data.error,
+                    success: null
+                })
+            }
+        }).catch(err => {
+            this.setState({
+                error: "User already exists!",
+                success: null
+            })
+        });
+    }
+
     render() {
+        console.log(this.state.success);
+
+        if(this.state.success!=null){
+            return(
+                <Redirect to={"/login"} success={this.state.success}/>
+            );
+        }
+
         return (
             <Container>
                 <h1 style={{color: "red"}}>{this.state.error}</h1>
@@ -42,12 +92,12 @@ class RegisterUser extends Component {
                                 placeholder='Enter name.' onChange={this.handleCheck}/>
                     <Form.Input id="surname" name="surname" type='text' required fluid label='Surname'
                                 placeholder='Enter surname.' onChange={this.handleCheck}/>
-                                <label>Skills you know:</label>
-                    <select multiple="" class="ui dropdown">
-                        {this.state.allSkills.map(item => {
-                            return <option value={item.id}>{item.name}</option>
-                        })}
-                    </select>
+                                <Label>Select skills you know:</Label>
+                    <Dropdown placeholder="Skills you know..." fluid multiple selection options={this.state.sortedOptions} onChange={this.setKnown}/>
+                    <br/>
+                    <Label>Select skills you want to know:</Label>
+                    <Dropdown placeholder="Skills you want to learn..." fluid multiple selection options={this.state.sortedOptions} onChange={this.setToKnow}/>
+                    <br/>
                     <Button type="submit">Register</Button>
                 </Form>
             </Container>
@@ -56,26 +106,19 @@ class RegisterUser extends Component {
 
     componentDidMount(){
         SkillFetch.fetchAll().then((data) =>{
-            this.setState({
-                allSkills: data.data
-            })
-        })
-    }
+            var sorted = [];
+            data.data.forEach(item => {
+               var obj = {
+                   key: item.id,
+                   text: item.name,
+                   value: item.id
+               }
+               sorted.push(obj);
+            });
 
-    attemptRegister(){
-        UserRegister.userRegister(
-            this.state.email,
-            this.state.password,
-            this.state.name,
-            this.state.surname,
-            this.state.retainedSkills,
-            this.state.skillsToLearn
-        ).then(data => {
-            if(data.success){
-                return <Redirect to={"/login"}/>
-            }else{
-                return <Redirect to={"/user/register"}  error={data.error}/>
-            }
+            this.setState({
+                sortedOptions: sorted
+            })
         })
     }
 }

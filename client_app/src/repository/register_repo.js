@@ -1,13 +1,13 @@
 import axios from '../custom_axios/axios';
 
 const UserRegister = {
-    userRegister: (email, password, name, surname, skillsRetained, skillsToLearn) => {
+    userRegister: (email, password, name, surname, retainedSkills, skillsToLearn) => {
         return axios.post("/register/user", {
             "email": email,
             "password": password,
             "name": name,
             "surname": surname,
-            "skillsRetained": skillsRetained,
+            "retainedSkills": retainedSkills,
             "skillsToLearn": skillsToLearn
         });
     },

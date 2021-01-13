@@ -41,7 +41,7 @@ class App extends Component{
                       <Route path={"/team/projects"} render={() => <TeamProjects userProfile={this.state.currentUser}/>}/>
                       <Route path={"/company/jobs"} render={() => <CompanyJobs userProfile={this.state.currentUser}/>}/>
                       <Route path={"/company/internships"} render={() => <CompanyInternships userProfile={this.state.currentUser}/>}/>
-                      <Route path={"/register/user"} render={() => <RegisterUser error={null}/>}/>
+                      <Route path={"/register/user"} render={() => <RegisterUser error={null} success={null}/>}/>
                       <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>

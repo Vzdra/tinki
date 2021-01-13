@@ -28,6 +28,7 @@ const Login = (props) => {
     if(!props.loggedIn){
         return(
             <Container>
+                <h1 style={{color: "green"}}>{props.success}</h1>
                 <h1 style={{color: "red"}}>{props.error}</h1>
                 <Form onSubmit={onFormSubmit}>
                     <Form.Input id="email" name="email" type='email' required fluid label='E-mail' placeholder='Enter e-mail.' onChange={handleCheck} />
