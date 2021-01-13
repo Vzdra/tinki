@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import SkillFetch from "../../repository/skill_repo";
 import UserRegister from "../../repository/register_repo";
 import {Component} from "react/cjs/react.production.min";
+import Login from "../login/login";
 
 class RegisterUser extends Component {
     constructor(props) {
@@ -17,8 +18,8 @@ class RegisterUser extends Component {
             surname: "",
             retainedSkills: [],
             skillsToLearn: [],
-            error: props.error,
-            success: props.success,
+            error: null,
+            success: null,
             sortedOptions:[]
         }
         this.attemptRegister = this.attemptRegister.bind(this);
@@ -57,6 +58,8 @@ class RegisterUser extends Component {
                     success: res.data.success,
                     error: null
                 })
+
+                this.props.message(this.state.success);
             }else{
                 this.setState({
                     error: res.data.error,
@@ -72,11 +75,9 @@ class RegisterUser extends Component {
     }
 
     render() {
-        console.log(this.state.success);
-
         if(this.state.success!=null){
             return(
-                <Redirect to={"/login"} success={this.state.success}/>
+                <Redirect to={"/login"}/>
             );
         }
 
@@ -105,6 +106,8 @@ class RegisterUser extends Component {
     }
 
     componentDidMount(){
+        this.props.message(null);
+
         SkillFetch.fetchAll().then((data) =>{
             var sorted = [];
             data.data.forEach(item => {

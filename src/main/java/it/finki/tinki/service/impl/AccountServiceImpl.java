@@ -105,6 +105,8 @@ public class AccountServiceImpl implements AccountService {
             throw new InvalidArgumentsException();
         }
 
+        System.out.println(email);
+
         if(this.companyRepository.findByEmail(email).isPresent()){
             throw new UserExistsException();
         }

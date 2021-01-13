@@ -11,7 +11,7 @@ const UserRegister = {
             "skillsToLearn": skillsToLearn
         });
     },
-    teamRegister:(email, password, name, members) => {
+    teamRegister: (email, password, name, members) => {
         return axios.post("/register/team",{
             "email": email,
             "password": password,
@@ -19,7 +19,7 @@ const UserRegister = {
             "members": members
         });
     },
-    companyRegister:(email, password, name, country, city, street) => {
+    companyRegister: (email, password, name, country, city, street) => {
         return axios.post("/register/company",{
             "email": email,
             "password": password,

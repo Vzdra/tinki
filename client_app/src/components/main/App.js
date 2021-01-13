@@ -13,8 +13,9 @@ import CompanyJobs from "../work/company_jobs";
 import TeamProjects from "../work/team_projects";
 import TeamJobs from "../work/team_jobs";
 import CompanyInternships from "../work/company_internships";
-import UserRegister from "../../repository/register_repo";
 import RegisterUser from "../register/register_user_form";
+import RegisterCompany from "../register/register_company_form";
+import RegisterTeam from "../register/register_team_form";
 
 class App extends Component{
   constructor(props) {
@@ -22,6 +23,7 @@ class App extends Component{
     this.state = {
         logged: false,
         error: null,
+        success: null,
         currentUser: {
         }
     }
@@ -32,7 +34,7 @@ class App extends Component{
               <Router>
                   <HeaderComp acc={this.state.currentUser.email} accType={this.state.currentUser.type} name={this.state.currentUser.name} removeState={this.removeState}/>
                   <main>
-                      <Route path={"/login"} render={() => <Login error={this.state.error} onCompleteForm={this.attemptLogin} loggedIn={this.state.logged}/>}/>
+                      <Route path={"/login"} render={() => <Login success={this.state.success} error={this.state.error} onCompleteForm={this.attemptLogin} loggedIn={this.state.logged}/>}/>
                       <Route path={"/profile"} render={() => <Profile userProfile={this.state.currentUser}/>}/>
                       <Route path={"/user/jobs"} render={() => <UserJobs userProfile={this.state.currentUser}/>}/>
                       <Route path={"/user/internships"} render={() => <UserInternships userProfile={this.state.currentUser}/>}/>
@@ -41,7 +43,9 @@ class App extends Component{
                       <Route path={"/team/projects"} render={() => <TeamProjects userProfile={this.state.currentUser}/>}/>
                       <Route path={"/company/jobs"} render={() => <CompanyJobs userProfile={this.state.currentUser}/>}/>
                       <Route path={"/company/internships"} render={() => <CompanyInternships userProfile={this.state.currentUser}/>}/>
-                      <Route path={"/register/user"} render={() => <RegisterUser error={null} success={null}/>}/>
+                      <Route path={"/register/user"} render={() => <RegisterUser message={this.setSuccess} />}/>
+                      <Route path={"/register/company"} render={() => <RegisterCompany message={this.setSuccess} />}/>
+                      <Route path={"/register/team"} render={() => <RegisterTeam message={this.setSuccess}/>}/>
                       <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>
@@ -57,6 +61,11 @@ class App extends Component{
       })
   }
 
+  setSuccess = (message) => {
+      this.setState({
+          success: message
+      })
+  }
 
   attemptLogin = (email, password, type) => {
       UserLogin.login(email, password, type).then((res) =>{
