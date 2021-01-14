@@ -19,6 +19,7 @@ import RegisterTeam from "../register/register_team_form";
 import Search from "../filter/search";
 import EditUser from "../account_edit/user_edit";
 import EditCompany from "../account_edit/company_edit";
+import EditTeam from "../account_edit/team_edit";
 
 class App extends Component{
   constructor(props) {
@@ -52,6 +53,7 @@ class App extends Component{
                       <Route path={"/user/search"} render={() => <Search loggedIn={this.state.logged}/>}/>
                       <Route path={"/user/edit"} render={() => <EditUser oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
                       <Route path={"/company/edit"} render={() => <EditCompany oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
+                      <Route path={"/team/edit"} render={() => <EditTeam oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
                       <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>
@@ -75,7 +77,8 @@ class App extends Component{
 
   setSuccess = (message) => {
       this.setState({
-          success: message
+          success: message,
+          error: null
       })
   }
 

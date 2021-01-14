@@ -2,26 +2,23 @@ import React from 'react';
 import 'semantic-ui-react';
 import {Button, Container, Form} from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
-import UserRegister from "../../repository/register_repo";
 import {Component} from "react/cjs/react.production.min";
 import AccountEdit from "../../repository/edit_account_repo";
 
-class EditCompany extends Component  {
+class EditTeam extends Component  {
     constructor(props){
         super(props);
         this.state = {
             email: props.oldUser.email,
             name: props.oldUser.name,
-            country: props.oldUser.address.country,
-            city: props.oldUser.address.city,
-            street: props.oldUser.address.street,
+            members: props.oldUser.members,
             error: null,
             success: null,
             id: props.oldUser.id,
             oldEmail: props.oldUser.email,
             type: props.oldUser.type
         }
-        this.attemptCompanyEdit = this.attemptCompanyEdit.bind(this);
+        this.attemptTeamEdit = this.attemptTeamEdit.bind(this);
     }
 
     handleCheck = (e, {value}) => {
@@ -31,15 +28,13 @@ class EditCompany extends Component  {
         })
     }
 
-    attemptCompanyEdit = () => {
-        AccountEdit.companyEdit(
+    attemptTeamEdit = () => {
+        AccountEdit.teamEdit(
             this.state.id,
             this.state.oldEmail,
             this.state.email,
             this.state.name,
-            this.state.country,
-            this.state.city,
-            this.state.street
+            this.state.members
         ).then(res =>{
             this.setState({
                 success: true,
@@ -48,7 +43,7 @@ class EditCompany extends Component  {
             this.props.updateUser(res.data);
         }).catch(err => {
             this.setState({
-                error: "Company already exists!",
+                error: "Team already exists!",
                 success: null
             })
         })
@@ -65,7 +60,7 @@ class EditCompany extends Component  {
             );
         }
 
-        if(this.state.type!=="COMPANY"){
+        if(this.state.type!=="TEAM"){
             return(
                 <Redirect to={"/profile"}/>
             );
@@ -74,17 +69,13 @@ class EditCompany extends Component  {
         return (
             <Container>
                 <h1 style={{color: "red"}}>{this.state.error}</h1>
-                <Form onSubmit={this.attemptCompanyEdit}>
+                <Form onSubmit={this.attemptTeamEdit}>
                     <Form.Input id="email" name="email" type='email' required fluid label='E-mail'
                                 placeholder='Enter e-mail.' value={this.state.email} onChange={this.handleCheck}/>
                     <Form.Input id="name" name="name" type='text' required fluid label='Name'
                                 placeholder='Enter company name.' value={this.state.name} onChange={this.handleCheck}/>
-                    <Form.Input id="country" name="country" type='text' required fluid label='Country'
-                                placeholder='Enter your country.' value={this.state.country} onChange={this.handleCheck}/>
-                    <Form.Input id="city" name="city" type='text' value={this.state.city} required fluid label='City'
-                                placeholder='Enter your city.' onChange={this.handleCheck}/>
-                    <Form.Input id="street" name="street" type='text' required fluid label='Street'
-                                placeholder='Enter address street.' value={this.state.street} onChange={this.handleCheck}/>
+                    <Form.Input id="members" name="members" type="number" required fluid label="Number of members"
+                                placeholder="Enter member count." value={this.state.members} onChange={this.handleCheck}/>
                     <Form.Field control={Button}>Register</Form.Field>
                 </Form>
             </Container>
@@ -92,4 +83,4 @@ class EditCompany extends Component  {
     }
 }
 
-export default EditCompany;
+export default EditTeam;

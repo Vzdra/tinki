@@ -78,11 +78,12 @@ class EditUser extends Component {
                 success: true,
                 error: null
             })
+
             this.props.updateUser(res.data);
         }).catch(err => {
             this.setState({
                 success: null,
-                error: "Error editing user.",
+                error: "User already exists.",
             })
         });
     }
