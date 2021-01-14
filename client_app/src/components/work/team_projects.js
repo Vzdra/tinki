@@ -9,8 +9,8 @@ const TeamProjects = (props) =>{
         if(props.userProfile.email!=null){
             return(
                 <Container textAlign="left">
-                    <Button as={Link} to={"/project/add"} primary>Add</Button>
-                    <h1>Registered Jobs:</h1>
+                    <Button as={Link} to={"/register/project"} primary>Add</Button>
+                    <h1>Registered Projects:</h1>
                     {props.userProfile.projects.map(item =>{
                         return <Projects
                             title={item.title}

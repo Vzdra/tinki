@@ -20,6 +20,9 @@ import Search from "../filter/search";
 import EditUser from "../account_edit/user_edit";
 import EditCompany from "../account_edit/company_edit";
 import EditTeam from "../account_edit/team_edit";
+import JobRegister from "../work_register/job_register";
+import InternshipRegister from "../work_register/internship_register";
+import ProjectRegister from "../work_register/project_register";
 
 class App extends Component{
   constructor(props) {
@@ -54,6 +57,9 @@ class App extends Component{
                       <Route path={"/user/edit"} render={() => <EditUser oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
                       <Route path={"/company/edit"} render={() => <EditCompany oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
                       <Route path={"/team/edit"} render={() => <EditTeam oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
+                      <Route path={"/register/job"} render={() => <JobRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateJobs={this.updateJobs} />}/>
+                      <Route path={"/register/internship"} render={() => <InternshipRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateInternships={this.updateInternships} />}/>
+                      <Route path={"/register/project"} render={() => <ProjectRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateInternships={this.updateProjects} />}/>
                       <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>
@@ -81,6 +87,33 @@ class App extends Component{
           error: null
       })
   }
+
+  updateJobs = (job) => {
+      this.setState(prevState => ({
+         currentUser:{
+             ...prevState.currentUser,
+             jobs: [...prevState.currentUser.jobs, job]
+         }
+      }))
+  }
+
+    updateInternships = (internship) => {
+        this.setState(prevState => ({
+            currentUser:{
+                ...prevState.currentUser,
+                internships: [...prevState.currentUser.internships, internship]
+            }
+        }))
+    }
+
+    updateProjects = (project) => {
+        this.setState(prevState => ({
+            currentUser:{
+                ...prevState.currentUser,
+                projects: [...prevState.currentUser.projects, project]
+            }
+        }))
+    }
 
   attemptLogin = (email, password, type) => {
       UserLogin.login(email, password, type).then((res) =>{

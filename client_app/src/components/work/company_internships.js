@@ -9,8 +9,8 @@ const CompanyInternships = (props) =>{
         if(props.userProfile.email!=null){
             return(
                 <Container textAlign="left">
-                    <Button as={Link} to={"/internships/add"} primary>Add</Button>
-                    <h1>Registered Jobs:</h1>
+                    <Button as={Link} to={"/register/internship"} primary>Add</Button>
+                    <h1>Registered Internships:</h1>
                     {props.userProfile.internships.map(item =>{
                         return <Internships
                             title={item.title}
