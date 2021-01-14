@@ -4,37 +4,38 @@ import {Button, Container, Form} from "semantic-ui-react";
 import { Redirect } from 'react-router-dom';
 import UserRegister from "../../repository/register_repo";
 import {Component} from "react/cjs/react.production.min";
+import AccountEdit from "../../repository/edit_account_repo";
 
-class RegisterCompany extends Component  {
+class EditCompany extends Component  {
     constructor(props){
         super(props);
         this.state = {
             email: "",
             password: "",
             name:"",
-            country: "",
+            members: "",
             city: "",
             street: "",
             error: null,
             success: null
         }
-        this.attemptCompanyRegister = this.attemptCompanyRegister.bind(this);
+        this.attemptCompanyEdit = this.attemptCompanyEdit.bind(this);
     }
 
     handleCheck = (e, {value}) => {
-            this.setState({
-                ...this.state,
-                [e.target.name]: value
-            })
+        this.setState({
+            ...this.state,
+            [e.target.name]: value
+        })
     }
 
-    attemptCompanyRegister = () => {
-        UserRegister.companyRegister(
+    attemptCompanyEdit = () => {
+        AccountEdit.companyEdit(
             this.state.email,
             this.state.password,
             this.state.name,
-            this.state.country,
-            this.state.city,
+            this.state.country
+            ,this.state.city,
             this.state.street
         ).then(res =>{
             if(res.data.success!=null){
@@ -51,15 +52,19 @@ class RegisterCompany extends Component  {
             }
         }).catch(err => {
             this.setState({
-                error: "User already exists!",
+                error: "Company already exists!",
                 success: null
             })
         })
     }
 
+    componentDidMount(){
+        this.props.message(null);
+    }
+
     render() {
-        if (this.state.success != null) {
-            return (
+        if(this.state.success!=null){
+            return(
                 <Redirect to={"/login"}/>
             );
         }
@@ -87,4 +92,4 @@ class RegisterCompany extends Component  {
     }
 }
 
-export default RegisterCompany;
+export default EditCompany;

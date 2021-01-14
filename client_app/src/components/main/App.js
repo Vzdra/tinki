@@ -16,6 +16,9 @@ import CompanyInternships from "../work/company_internships";
 import RegisterUser from "../register/register_user_form";
 import RegisterCompany from "../register/register_company_form";
 import RegisterTeam from "../register/register_team_form";
+import Search from "../filter/search";
+import EditUser from "../account_edit/user_edit";
+import EditCompany from "../account_edit/company_edit";
 
 class App extends Component{
   constructor(props) {
@@ -29,7 +32,7 @@ class App extends Component{
     }
   }
 
-  render(){
+    render(){
           return(
               <Router>
                   <HeaderComp acc={this.state.currentUser.email} accType={this.state.currentUser.type} name={this.state.currentUser.name} removeState={this.removeState}/>
@@ -46,6 +49,9 @@ class App extends Component{
                       <Route path={"/register/user"} render={() => <RegisterUser message={this.setSuccess} />}/>
                       <Route path={"/register/company"} render={() => <RegisterCompany message={this.setSuccess} />}/>
                       <Route path={"/register/team"} render={() => <RegisterTeam message={this.setSuccess}/>}/>
+                      <Route path={"/user/search"} render={() => <Search loggedIn={this.state.logged}/>}/>
+                      <Route path={"/user/edit"} render={() => <EditUser oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
+                      <Route path={"/company/edit"} render={() => <EditCompany oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
                       <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>
@@ -61,6 +67,12 @@ class App extends Component{
       })
   }
 
+  updateUser = (user) =>{
+      this.setState({
+          currentUser: user
+      })
+  }
+
   setSuccess = (message) => {
       this.setState({
           success: message
@@ -69,7 +81,6 @@ class App extends Component{
 
   attemptLogin = (email, password, type) => {
       UserLogin.login(email, password, type).then((res) =>{
-          console.log(res.data);
           if(res.data.email==null){
               this.setState({
                   logged: false,

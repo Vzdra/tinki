@@ -9,7 +9,7 @@ const TeamProfile = (props) =>{
             <h3>{props.data.name}</h3>
             <h2>E-mail: {props.data.email}</h2>
             <h3>Members: {props.data.members}</h3>
-            <Button primary as={Link} to={"/profile/edit"}>Edit</Button>
+            <Button primary as={Link} to={"/team/edit"}>Edit</Button>
         </Container>
     );
 }
