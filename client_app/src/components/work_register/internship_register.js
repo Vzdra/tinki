@@ -67,16 +67,10 @@ class InternshipRegister extends Component {
             );
         }
 
-        if(this.state.success===true){
-            if(this.state.type==="COMPANY"){
-                return(
-                    <Redirect to={"/company/internships"}/>
-                );
-            }else{
-                return(
-                    <Redirect to={"/profile"}/>
-                );
-            }
+        if(this.state.success===true) {
+            return (
+                <Redirect to={"/company/internships"}/>
+            );
         }
 
         return (

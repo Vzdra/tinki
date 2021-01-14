@@ -53,12 +53,11 @@ class ProjectRegister extends Component {
             this.state.validUntil,
             this.state.skillsRequired
         ).then(res => {
-            console.log(res);
-            // this.props.updateProjects(res.data);
-            // this.setState({
-            //     success: true,
-            //     error: null
-            // })
+            this.props.updateProjects(res.data);
+            this.setState({
+                success: true,
+                error: null
+            })
         }).catch(err => {
             console.log(err);
             this.setState({
@@ -76,15 +75,9 @@ class ProjectRegister extends Component {
         }
 
         if(this.state.success===true){
-            if(this.state.type==="TEAM"){
-                return(
-                    <Redirect to={"/company/jobs"}/>
-                );
-            }else{
-                return(
-                    <Redirect to={"/team/jobs"}/>
-                );
-            }
+            return (
+                <Redirect to={"/team/projects"}/>
+            );
         }
 
         return (

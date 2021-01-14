@@ -59,7 +59,7 @@ class App extends Component{
                       <Route path={"/team/edit"} render={() => <EditTeam oldUser={this.state.currentUser} updateUser={this.updateUser} message={this.setSuccess}/>}/>
                       <Route path={"/register/job"} render={() => <JobRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateJobs={this.updateJobs} />}/>
                       <Route path={"/register/internship"} render={() => <InternshipRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateInternships={this.updateInternships} />}/>
-                      <Route path={"/register/project"} render={() => <ProjectRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateInternships={this.updateProjects} />}/>
+                      <Route path={"/register/project"} render={() => <ProjectRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateProjects={this.updateProjects} />}/>
                       <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>
