@@ -1,12 +1,19 @@
 import React from 'react';
 import {Header, List, Segment, Button} from 'semantic-ui-react';
+import {Link} from "react-router-dom";
 
 const Projects = (props) => {
 
     return(
         <Segment>
             <Header as="h3">{props.item.title}</Header>
-            {props.item.type!=="USER" ? <Button primary>Edit</Button> : <span> </span>}
+            {props.item.type!=="USER" ? <Button primary as={Link} to={{
+                pathname: "/edit/project",
+                state: {
+                    index: props.index,
+                    item: props.item
+                }
+            }}>Edit</Button> : <span> </span>}
             <Segment>{props.item.description}</Segment>
             <Segment>
                 <Header as="h5" color="grey">{props.item.accountName}</Header>

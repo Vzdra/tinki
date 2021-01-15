@@ -130,6 +130,7 @@ public class WorkServiceImpl implements WorkService {
         j.setTitle(title);
         j.setDescription(description);
         j.setSalary(salary);
+        j.setOpenSpots(openSpots);
 
         return this.internshipRepository.save(j);
     }

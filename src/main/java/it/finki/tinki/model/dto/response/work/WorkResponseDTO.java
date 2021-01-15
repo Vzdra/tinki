@@ -12,6 +12,7 @@ public class WorkResponseDTO {
     int salary;
     String accountEmail;
     String accountName;
+    Long accountId;
     AccountType accountType;
     String error;
 
@@ -27,6 +28,7 @@ public class WorkResponseDTO {
         this.title = title;
         this.description = description;
         this.salary = salary;
+        this.accountId = account.getId();
         this.accountEmail = account.getEmail();
         this.accountName = account.getName();
         this.accountType = account.getAccountType();

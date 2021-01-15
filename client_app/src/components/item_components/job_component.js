@@ -6,12 +6,11 @@ const Jobs = (props) => {
     return(
         <Segment>
             <Header as="h3">{props.item.title}</Header>
-            {props.item.type!=="USER" ? <Button primary as={Link} to={{
+            {props.item.accountType!=="USER" ? <Button primary as={Link} to={{
                 pathname: "/edit/job",
                 state: {
-                    jobId: props.item.id,
-                    accId: props.item.accId,
-                    type: props.item.type
+                    index: props.index,
+                    item: props.item
                 }
             }}>Edit</Button> : <span> </span>}
             <Segment>{props.item.description}</Segment>

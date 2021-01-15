@@ -23,7 +23,9 @@ import EditTeam from "../account_edit/team_edit";
 import JobRegister from "../work_register/job_register";
 import InternshipRegister from "../work_register/internship_register";
 import ProjectRegister from "../work_register/project_register";
-import EditJob from "../work_edit/test";
+import EditJob from "../work_edit/edit_job";
+import EditInternship from "../work_edit/edit_internship";
+import EditProject from "../work_edit/edit_project";
 
 class App extends Component{
   constructor(props) {
@@ -62,8 +64,8 @@ class App extends Component{
                       <Route path={"/register/internship"} render={() => <InternshipRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateInternships={this.updateInternships} />}/>
                       <Route path={"/register/project"} render={() => <ProjectRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateProjects={this.updateProjects} />}/>
                       <Route path={"/edit/job"} render={(props) => <EditJob {...props}  editJob={this.editJob}/>} />
-                      {/*<Route path={"/edit/internship"} render={(props) => <EditInternship {...props}  editJob={this.editInternship}/>} />*/}
-                      {/*<Route path={"/edit/project"} render={(props) => <EditProject {...props}  editJob={this.editProject}/>} />*/}
+                      <Route path={"/edit/internship"} render={(props) => <EditInternship {...props}  editInternship={this.editInternship}/>} />
+                      <Route path={"/edit/project"} render={(props) => <EditProject {...props}  editProject={this.editProject}/>} />
                       <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>
@@ -120,28 +122,37 @@ class App extends Component{
     }
 
     editJob = (job, index) => {
+      let jobs = this.state.currentUser.jobs;
+      jobs[index] = job;
+
       this.setState(prevState => ({
           currentUser:{
               ...prevState.currentUser,
-              jobs: Object.assign([],this.state.jobs,{[index]: job})
+              jobs: jobs
           }
       }))
     }
 
     editInternship = (internship, index) => {
+        let interns = this.state.currentUser.internships;
+        interns[index] = internship;
+
         this.setState(prevState => ({
             currentUser:{
                 ...prevState.currentUser,
-                internships: Object.assign([],this.state.jobs,{[index]: internship})
+                internships: interns
             }
         }))
     }
 
     editProject = (project, index) => {
+        let proj = this.state.currentUser.projects;
+        proj[index] = project;
+
         this.setState(prevState => ({
             currentUser:{
                 ...prevState.currentUser,
-                projects: Object.assign([],this.state.jobs,{[index]: project})
+                projects: proj
             }
         }))
     }

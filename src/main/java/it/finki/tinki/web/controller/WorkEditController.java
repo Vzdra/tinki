@@ -3,6 +3,8 @@ package it.finki.tinki.web.controller;
 import it.finki.tinki.model.Work.Internship;
 import it.finki.tinki.model.Work.Job;
 import it.finki.tinki.model.Work.Project;
+import it.finki.tinki.model.dto.edit.work.InternshipEditDTO;
+import it.finki.tinki.model.dto.edit.work.WorkEditDTO;
 import it.finki.tinki.model.dto.register.work.InternshipRegisterDTO;
 import it.finki.tinki.model.dto.register.work.JobRegisterDTO;
 import it.finki.tinki.model.dto.register.work.ProjectRegisterDTO;
@@ -28,56 +30,50 @@ public class WorkEditController {
     }
 
     @PostMapping("/job/{id}")
-    public Map<String, String> editJob(@PathVariable Long id,
-                                       @RequestBody JobRegisterDTO body){
+    public JobResponseDTO editJob(@PathVariable Long id,
+                                  @RequestBody WorkEditDTO body){
 
-        Map<String, String> response = new HashMap<>();
+        Job j = this.workService.getJobById(id);
 
-        if(body.getAccountId().equals(this.workService.getJobById(id).getAccount().getId())) {
+        if(body.getAccountId().equals(j.getAccount().getId())) {
             Job k = this.workService.editJob(id, body.getTitle(), body.getDescription(), body.getSalary());
             if(k!=null){
-                response.put("success", "Job edited successfully!");
-                return response;
+                return new JobResponseDTO(k);
             }
         }
 
-        response.put("error", "Internship edit failed!");
-        return response;
+        return new JobResponseDTO();
     }
 
     @PostMapping("/internship/{id}")
-    public Map<String, String> editInternship(@PathVariable Long id,
-                                                @RequestBody InternshipRegisterDTO body){
+    public InternshipResponseDTO editInternship(@PathVariable Long id,
+                                                @RequestBody InternshipEditDTO body){
 
-        Map<String, String> response = new HashMap<>();
+        Internship i = this.workService.getInternshipById(id);
 
-        if(body.getAccountId().equals(this.workService.getInternshipById(id).getAccount().getId())){
+        if(body.getAccountId().equals(i.getAccount().getId())){
             Internship k = this.workService.editInternship(id, body.getTitle(), body.getDescription(), body.getSalary(), body.getOpenSpots());
             if(k!=null){
-                response.put("success", "Internship edited successfully!");
-                return response;
+                return new InternshipResponseDTO(k);
             }
         }
 
-        response.put("error", "Internship edit failed!");
-        return response;
+        return new InternshipResponseDTO();
     }
 
     @PostMapping("/project/{id}")
-    public Map<String, String> editProject(@PathVariable Long id,
-                                          @RequestBody ProjectRegisterDTO body){
+    public ProjectResponseDTO editProject(@PathVariable Long id,
+                                          @RequestBody WorkEditDTO body){
 
-        Map<String, String> response = new HashMap<>();
+        Project p = this.workService.getProjectById(id);
 
-        if(body.getAccountId().equals(this.workService.getProjectById(id).getAccount().getId())) {
+        if(body.getAccountId().equals(p.getAccount().getId())) {
             Project k = this.workService.editProject(id, body.getTitle(), body.getDescription(), body.getSalary());
             if(k!=null){
-                response.put("success", "Project edited successfully!");
-                return response;
+                return new ProjectResponseDTO(k);
             }
         }
 
-        response.put("error", "Project edit failed!");
-        return response;
+        return new ProjectResponseDTO();
     }
 }
