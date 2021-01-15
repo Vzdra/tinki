@@ -11,8 +11,10 @@ const TeamJobs = (props) =>{
                 <Container textAlign="left">
                     <Button as={Link} to={"/register/job"} primary>Add</Button>
                     <h1>Registered Jobs:</h1>
-                    {props.userProfile.jobs.map(item =>{
+                    {props.userProfile.jobs.map((item, index) =>{
                         return <Jobs
+                            key={item.id}
+                            index={index}
                             item={item}
                         />
                     })}

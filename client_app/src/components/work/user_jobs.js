@@ -10,8 +10,10 @@ const UserJobs = (props) =>{
             return(
                 <Container textAlign="left">
                     <h1>Jobs for you!</h1>
-                    {props.userProfile.jobs.map(item =>{
+                    {props.userProfile.jobs.map((item, index) =>{
                         return <Jobs
+                            key={item.id}
+                            index={index}
                             item={item}
                         />
                     })}

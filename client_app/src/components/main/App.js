@@ -62,8 +62,8 @@ class App extends Component{
                       <Route path={"/register/internship"} render={() => <InternshipRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateInternships={this.updateInternships} />}/>
                       <Route path={"/register/project"} render={() => <ProjectRegister accountId={this.state.currentUser.id} type={this.state.currentUser.type} updateProjects={this.updateProjects} />}/>
                       <Route path={"/edit/job"} render={(props) => <EditJob {...props}  editJob={this.editJob}/>} />
-                      <Route path={"/edit/internship"} render={(props) => <EditInternship {...props}  editJob={this.editInternship}/>} />
-                      <Route path={"/edit/project"} render={(props) => <EditProject {...props}  editJob={this.editProject}/>} />
+                      {/*<Route path={"/edit/internship"} render={(props) => <EditInternship {...props}  editJob={this.editInternship}/>} />*/}
+                      {/*<Route path={"/edit/project"} render={(props) => <EditProject {...props}  editJob={this.editProject}/>} />*/}
                       <Route path={"/logout"} render={() => <Redirect to={"/login"}/>}/>
                       <Route path={"/"} render={() => <Redirect to={"/login"}/>}/>
                   </main>

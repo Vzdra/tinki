@@ -11,14 +11,11 @@ const TeamProjects = (props) =>{
                 <Container textAlign="left">
                     <Button as={Link} to={"/register/project"} primary>Add</Button>
                     <h1>Registered Projects:</h1>
-                    {props.userProfile.projects.map(item =>{
+                    {props.userProfile.projects.map((item, index) =>{
                         return <Projects
-                            title={item.title}
-                            description={item.description}
-                            accountName={item.accountName}
-                            accountEmail={item.accountEmail}
-                            skills={item.skillsRequired}
-                            type={props.userProfile.type}
+                            key={item.id}
+                            index={index}
+                            item={item}
                         />
                     })}
                 </Container>

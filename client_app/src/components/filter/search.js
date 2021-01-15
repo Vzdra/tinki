@@ -94,9 +94,9 @@ const Search = (props) => {
                     <Form.Field control={Button}>Search</Form.Field>
                 </Form>
 
-                {formData.items.map(item => {
-                    return  (item.skillsTrained && <Internships
-                            item={item} />) || (<Jobs item={item} />)
+                {formData.items.map((item,index) => {
+                    return (item.skillsTrained && <Internships key={item.id} index={index} item={item} />)
+                        || (<Jobs key={item.id} index={index} item={item} />)
                 })}
             </Container>
         );

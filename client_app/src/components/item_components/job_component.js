@@ -6,7 +6,7 @@ const Jobs = (props) => {
     return(
         <Segment>
             <Header as="h3">{props.item.title}</Header>
-            {props.type!=="USER" ? <Button primary as={Link} to={{
+            {props.item.type!=="USER" ? <Button primary as={Link} to={{
                 pathname: "/edit/job",
                 state: {
                     jobId: props.item.id,
@@ -22,7 +22,7 @@ const Jobs = (props) => {
             <Segment>
                 <Header as="h3">Skills Required:</Header>
                 <List>
-                    {props.item.skills.map(skill => {
+                    {props.item.skillsRequired.map(skill => {
                         return <List.Item key={skill.id}>{skill.name}</List.Item>
                     })}
                 </List>

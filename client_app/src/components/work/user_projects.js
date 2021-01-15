@@ -9,14 +9,11 @@ const UserProjects = (props) =>{
             return(
                 <Container>
                     <h1>Projects for you!</h1>
-                    {props.userProfile.projects.map(item =>{
+                    {props.userProfile.projects.map((item,index) =>{
                         return <Projects
-                            title={item.title}
-                            description={item.description}
-                            accountName={item.accountName}
-                            accountEmail={item.accountEmail}
-                            skills={item.skillsRequired}
-                            type={props.userProfile.type}
+                            key={item.id}
+                            index={index}
+                            item={item}
                         />})
                     }
                 </Container>
