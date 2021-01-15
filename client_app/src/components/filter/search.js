@@ -96,18 +96,7 @@ const Search = (props) => {
 
                 {formData.items.map(item => {
                     return  (item.skillsTrained && <Internships
-                            title={item.title}
-                            description={item.description}
-                            accountName={item.accountName}
-                            accountEmail={item.accountEmail}
-                            skills={item.skillsTrained}
-                    />) || (<Jobs
-                        title={item.title}
-                        description={item.description}
-                        accountName={item.accountName}
-                        accountEmail={item.accountEmail}
-                        skills={item.skillsRequired}
-                    />)
+                            item={item} />) || (<Jobs item={item} />)
                 })}
             </Container>
         );

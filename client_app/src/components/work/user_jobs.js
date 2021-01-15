@@ -12,12 +12,7 @@ const UserJobs = (props) =>{
                     <h1>Jobs for you!</h1>
                     {props.userProfile.jobs.map(item =>{
                         return <Jobs
-                            title={item.title}
-                            description={item.description}
-                            accountName={item.accountName}
-                            accountEmail={item.accountEmail}
-                            skills={item.skillsRequired}
-                            type={props.userProfile.type}
+                            item={item}
                         />
                     })}
                 </Container>

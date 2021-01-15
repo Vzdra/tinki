@@ -5,24 +5,24 @@ import {Link} from "react-router-dom";
 const Jobs = (props) => {
     return(
         <Segment>
-            <Header as="h3">{props.title}</Header>
+            <Header as="h3">{props.item.title}</Header>
             {props.type!=="USER" ? <Button primary as={Link} to={{
                 pathname: "/edit/job",
                 state: {
-                    jobId: props.id,
-                    accId: props.accId,
-                    type: props.type
+                    jobId: props.item.id,
+                    accId: props.item.accId,
+                    type: props.item.type
                 }
             }}>Edit</Button> : <span> </span>}
-            <Segment>{props.description}</Segment>
+            <Segment>{props.item.description}</Segment>
             <Segment>
-                <Header as="h5" color="grey">{props.accountName}</Header>
-                <Header as="h4" color="blue">Owner Mail: {props.accountEmail}</Header>
+                <Header as="h5" color="grey">{props.item.accountName}</Header>
+                <Header as="h4" color="blue">Owner Mail: {props.item.accountEmail}</Header>
             </Segment>
             <Segment>
                 <Header as="h3">Skills Required:</Header>
                 <List>
-                    {props.skills.map(skill => {
+                    {props.item.skills.map(skill => {
                         return <List.Item key={skill.id}>{skill.name}</List.Item>
                     })}
                 </List>
