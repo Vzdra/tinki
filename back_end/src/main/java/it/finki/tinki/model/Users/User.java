@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.List;
 
-@Entity
+@Entity(name = "users")
 @Data
 public class User extends Account{
 

@@ -117,7 +117,7 @@ class EditUser extends Component {
                     <Label>Select skills you want to know:</Label>
                     <Dropdown placeholder="Skills you want to learn..." fluid multiple value={this.state.toLearn} selection options={this.state.sortedOptions} onChange={this.setToKnow}/>
                     <br/>
-                    <Button primary type="submit">Edit</Button>
+                    <Button primary type="submit">Confirm</Button>
                 </Form>
             </Container>
         );

@@ -87,7 +87,7 @@ class EditInternship extends Component {
                                 placeholder='Enter salary...' onChange={this.handleCheck}/>
                     <Form.Input id="openSpots" name="openSpots" type='openSpots' value={this.state.openSpots} required fluid label='Open Spots'
                                 placeholder='Enter open spots...' onChange={this.handleCheck}/>
-                    <Button type="submit">Edit</Button>
+                    <Button type="submit">Confirm</Button>
                 </Form>
             </Container>
         );

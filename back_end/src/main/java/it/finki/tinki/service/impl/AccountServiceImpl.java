@@ -17,6 +17,7 @@ import it.finki.tinki.service.AccountService;
 import it.finki.tinki.service.MatchmakerService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +49,17 @@ public class AccountServiceImpl implements AccountService {
         this.projectRepository = projectRepository;
         this.internshipRepository = internshipRepository;
         this.matchmakerService = matchmakerService;
+    }
+
+
+    @Override
+    public boolean hasData() {
+
+        List<User> users = this.userRepository.findAll();
+        List<Company> companies = this.companyRepository.findAll();
+        List<Team> teams = this.teamRepository.findAll();
+
+        return users.size() > 0 || companies.size() > 0 || teams.size() > 0;
     }
 
     @Override

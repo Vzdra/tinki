@@ -1,12 +1,17 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {Menu, MenuItem } from "semantic-ui-react";
-
+import logo from "../../assets/logo.png";
 
 const HeaderComp = (props) => {
     if(props.accType == null){
         return(
             <Menu inverted>
+                <MenuItem>
+                    <div className="ui mini image">
+                        <img src={logo}/>
+                    </div>
+                </MenuItem>
                 <MenuItem  as={Link} to='/register/user'>
                     Register User
                 </MenuItem>
@@ -25,6 +30,11 @@ const HeaderComp = (props) => {
         if(props.accType==="COMPANY"){
             return(
                 <Menu inverted>
+                    <MenuItem>
+                        <div className="ui mini image">
+                            <img src={logo}/>
+                        </div>
+                    </MenuItem>
                     <Menu.Item as={Link} to='/profile'>
                         Profile
                     </Menu.Item>
@@ -42,6 +52,11 @@ const HeaderComp = (props) => {
         }else if(props.accType==="TEAM"){
             return(
                 <Menu inverted>
+                    <MenuItem>
+                        <div className="ui mini image">
+                            <img src={logo}/>
+                        </div>
+                    </MenuItem>
                     <Menu.Item as={Link} to='/profile'>
                         Profile
                     </Menu.Item>
@@ -59,6 +74,11 @@ const HeaderComp = (props) => {
         }else if(props.accType==="USER"){
             return(
                 <Menu inverted>
+                    <MenuItem>
+                        <div className="ui mini image">
+                            <img src={logo}/>
+                        </div>
+                    </MenuItem>
                     <Menu.Item as={Link} to='/profile'>
                         Profile
                     </Menu.Item>

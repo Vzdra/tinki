@@ -76,7 +76,7 @@ class EditTeam extends Component  {
                                 placeholder='Enter company name.' value={this.state.name} onChange={this.handleCheck}/>
                     <Form.Input id="members" name="members" type="number" required fluid label="Number of members"
                                 placeholder="Enter member count." value={this.state.members} onChange={this.handleCheck}/>
-                    <Form.Field control={Button}>Register</Form.Field>
+                    <Form.Field control={Button}>Confirm</Form.Field>
                 </Form>
             </Container>
         );

@@ -81,7 +81,7 @@ class EditProject extends Component {
                                 placeholder='Enter description...' onChange={this.handleCheck}/>
                     <Form.Input id="salary" name="salary" type='number' value={this.state.salary} required fluid label='Salary'
                                 placeholder='Enter salary...' onChange={this.handleCheck}/>
-                    <Button type="submit">Edit</Button>
+                    <Button type="submit">Confirm</Button>
                 </Form>
             </Container>
         );

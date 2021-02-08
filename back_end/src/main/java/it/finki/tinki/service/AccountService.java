@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccountService {
+    boolean hasData();
     Account findUser(String email, String password, AccountType type);
     Account registerUser(String email, String password, String name, String surname, List<Skill> retainedSkills, List<Skill> skillsToLearn);
     Account registerTeam(String email, String password, String name, int members);

@@ -1,0 +1,223 @@
+CREATE DATABASE tinki;
+
+CREATE USER tinki WITH PASSWORD '.';
+
+ALTER DATABASE tinki OWNER TO tinki;
+
+-- public.address definition
+
+-- Drop table
+
+-- DROP TABLE public.address;
+
+CREATE TABLE public.address (
+	id bigserial NOT NULL,
+	city varchar(255) NULL,
+	country varchar(255) NULL,
+	street varchar(255) NULL,
+	CONSTRAINT address_pkey PRIMARY KEY (id)
+);
+
+
+-- public.internship definition
+
+-- Drop table
+
+-- DROP TABLE public.internship;
+
+CREATE TABLE public.internship (
+	id int8 NOT NULL,
+	description varchar(255) NULL,
+	salary int4 NOT NULL,
+	title varchar(255) NULL,
+	account_id int8 NULL,
+	open_spots int4 NOT NULL,
+	CONSTRAINT internship_pkey PRIMARY KEY (id)
+);
+
+
+-- public.job definition
+
+-- Drop table
+
+-- DROP TABLE public.job;
+
+CREATE TABLE public.job (
+	id int8 NOT NULL,
+	description varchar(255) NULL,
+	salary int4 NOT NULL,
+	title varchar(255) NULL,
+	account_id int8 NULL,
+	CONSTRAINT job_pkey PRIMARY KEY (id)
+);
+
+
+-- public.project definition
+
+-- Drop table
+
+-- DROP TABLE public.project;
+
+CREATE TABLE public.project (
+	id int8 NOT NULL,
+	description varchar(255) NULL,
+	salary int4 NOT NULL,
+	title varchar(255) NULL,
+	account_id int8 NULL,
+	valid_until timestamp NULL,
+	CONSTRAINT project_pkey PRIMARY KEY (id)
+);
+
+
+-- public.skill definition
+
+-- Drop table
+
+-- DROP TABLE public.skill;
+
+CREATE TABLE public.skill (
+	id bigserial NOT NULL,
+	"name" varchar(255) NULL,
+	CONSTRAINT skill_pkey PRIMARY KEY (id)
+);
+
+
+-- public.team definition
+
+-- Drop table
+
+-- DROP TABLE public.team;
+
+CREATE TABLE public.team (
+	id int8 NOT NULL,
+	account_type int4 NULL,
+	email varchar(255) NULL,
+	"name" varchar(255) NULL,
+	"password" varchar(255) NULL,
+	members int4 NOT NULL,
+	CONSTRAINT team_pkey PRIMARY KEY (id),
+	CONSTRAINT uk_40rwssq6p5ns2btjpdjesrs7 UNIQUE (email)
+);
+
+
+-- public.users definition
+
+-- Drop table
+
+-- DROP TABLE public.users;
+
+CREATE TABLE public.users (
+	id int8 NOT NULL,
+	account_type int4 NULL,
+	email varchar(255) NULL,
+	"name" varchar(255) NULL,
+	"password" varchar(255) NULL,
+	surname varchar(255) NULL,
+	CONSTRAINT uk_6dotkott2kjsp8vw4d0m25fb7 UNIQUE (email),
+	CONSTRAINT users_pkey PRIMARY KEY (id)
+);
+
+
+-- public.company definition
+
+-- Drop table
+
+-- DROP TABLE public.company;
+
+CREATE TABLE public.company (
+	id int8 NOT NULL,
+	account_type int4 NULL,
+	email varchar(255) NULL,
+	"name" varchar(255) NULL,
+	"password" varchar(255) NULL,
+	address_id int8 NULL,
+	CONSTRAINT company_pkey PRIMARY KEY (id),
+	CONSTRAINT uk_bma9lv19ba3yjwf12a34xord3 UNIQUE (email),
+	CONSTRAINT fkgfifm4874ce6mecwj54wdb3ma FOREIGN KEY (address_id) REFERENCES address(id)
+);
+
+
+-- public.internship_skills_trained definition
+
+-- Drop table
+
+-- DROP TABLE public.internship_skills_trained;
+
+CREATE TABLE public.internship_skills_trained (
+	internship_id int8 NOT NULL,
+	skills_trained_id int8 NOT NULL,
+	CONSTRAINT fkaffo89daxg10hnaoiq2q4dj0f FOREIGN KEY (internship_id) REFERENCES internship(id),
+	CONSTRAINT fks4c3ng84ax1cj4cm3pmdjljos FOREIGN KEY (skills_trained_id) REFERENCES skill(id)
+);
+
+
+-- public.job_skills_required definition
+
+-- Drop table
+
+-- DROP TABLE public.job_skills_required;
+
+CREATE TABLE public.job_skills_required (
+	job_id int8 NOT NULL,
+	skills_required_id int8 NOT NULL,
+	CONSTRAINT fk8shkwbrkfqf595ejsx1awyqm5 FOREIGN KEY (skills_required_id) REFERENCES skill(id),
+	CONSTRAINT fkd9624v3iv0b875ekie7xixq61 FOREIGN KEY (job_id) REFERENCES job(id)
+);
+
+
+-- public."match" definition
+
+-- Drop table
+
+-- DROP TABLE public."match";
+
+CREATE TABLE public."match" (
+	coefficient float4 NOT NULL,
+	"type" int4 NULL,
+	user_id int8 NOT NULL,
+	work_id int8 NOT NULL,
+	CONSTRAINT match_pkey PRIMARY KEY (user_id, work_id),
+	CONSTRAINT fkcvroh7plwfu0pp9inhs51i1w6 FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+
+-- public.project_skills_required definition
+
+-- Drop table
+
+-- DROP TABLE public.project_skills_required;
+
+CREATE TABLE public.project_skills_required (
+	project_id int8 NOT NULL,
+	skills_required_id int8 NOT NULL,
+	CONSTRAINT fkbpxfe2agmbrnt5s9bljjpyl15 FOREIGN KEY (project_id) REFERENCES project(id),
+	CONSTRAINT fkhavvnnjpwbo99mwvr9fp2akgj FOREIGN KEY (skills_required_id) REFERENCES skill(id)
+);
+
+
+-- public.users_retained_skills definition
+
+-- Drop table
+
+-- DROP TABLE public.users_retained_skills;
+
+CREATE TABLE public.users_retained_skills (
+	users_id int8 NOT NULL,
+	retained_skills_id int8 NOT NULL,
+	CONSTRAINT fk173wmfmh98upsm5nroy742ivh FOREIGN KEY (retained_skills_id) REFERENCES skill(id),
+	CONSTRAINT fkcva0reqw29kym3pp492jwnnq9 FOREIGN KEY (users_id) REFERENCES users(id)
+);
+
+
+-- public.users_skills_to_learn definition
+
+-- Drop table
+
+-- DROP TABLE public.users_skills_to_learn;
+
+CREATE TABLE public.users_skills_to_learn (
+	users_id int8 NOT NULL,
+	skills_to_learn_id int8 NOT NULL,
+	CONSTRAINT fkn0j449kx3g55p2fqudar6n8q5 FOREIGN KEY (users_id) REFERENCES users(id),
+	CONSTRAINT fkochtgvcbv6gru34o2bp38uss7 FOREIGN KEY (skills_to_learn_id) REFERENCES skill(id)
+);

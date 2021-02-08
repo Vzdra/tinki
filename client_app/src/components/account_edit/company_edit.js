@@ -85,7 +85,7 @@ class EditCompany extends Component  {
                                 placeholder='Enter your city.' onChange={this.handleCheck}/>
                     <Form.Input id="street" name="street" type='text' required fluid label='Street'
                                 placeholder='Enter address street.' value={this.state.street} onChange={this.handleCheck}/>
-                    <Form.Field control={Button}>Register</Form.Field>
+                    <Form.Field control={Button}>Confirm</Form.Field>
                 </Form>
             </Container>
         );
