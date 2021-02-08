@@ -1,72 +1,72 @@
 .idea
 
+back_end/*.java.hsp
+back_end/*.sonarj
+back_end/*.sw*
+back_end/.DS_Store
+back_end/.settings
+back_end/.springBeans
+back_end/bin
+back_end/build.sh
+back_end/integration-repo
+back_end/ivy-cache
+back_end/jxl.log
+back_end/jmx.log
+back_end/derby.log
+back_end/spring-test/test-output/
+back_end/*.gradle
+back_end/argfile*
+back_end/activemq-data/
+
+back_end/classes/
+back_end/build
+back_end/buildSrc/build
+back_end/spring-*/build
+back_end/spring-core/kotlin-coroutines/build
+back_end/framework-bom/build
+back_end/integration-tests/build
+back_end/src/asciidoc/build
+back_end/target/
+
+# Eclipse artifacts, including WTP generated manifests
+back_end/.classpath
+back_end/.project
+back_end/spring-*/src/main/java/META-INF/MANIFEST.MF
+
+# IDEA artifacts and output dirs
+back_end/*.iml
+back_end/*.ipr
+back_end/*.iws
+back_end/.idea
+back_end/out
+back_end/test-output
+back_end/atlassian-ide-plugin.xml
+back_end/.gradletasknamecache
+
+# Client
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+client_app/node_modules
+client_app/.pnp
+client_app/.pnp.js
 
 # testing
-/coverage
+client_app/coverage
 
 # production
-/build
+client_app/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+client_app/.DS_Store
+client_app/.env.local
+client_app/.env.development.local
+client_app/.env.test.local
+client_app/.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+client_app/npm-debug.log*
+client_app/yarn-debug.log*
+client_app/yarn-error.log*
 
-.eslintcache
-
-*.java.hsp
-*.sonarj
-*.sw*
-.DS_Store
-.settings
-.springBeans
-bin
-build.sh
-integration-repo
-ivy-cache
-jxl.log
-jmx.log
-derby.log
-spring-test/test-output/
-.gradle
-argfile*
-activemq-data/
-
-classes/
-/build
-buildSrc/build
-/spring-*/build
-/spring-core/kotlin-coroutines/build
-/framework-bom/build
-/integration-tests/build
-/src/asciidoc/build
-target/
-
-# Eclipse artifacts, including WTP generated manifests
-.classpath
-.project
-spring-*/src/main/java/META-INF/MANIFEST.MF
-
-# IDEA artifacts and output dirs
-*.iml
-*.ipr
-*.iws
-.idea
-out
-test-output
-atlassian-ide-plugin.xml
-.gradletasknamecache
-
-# Client APP
+client_app/.eslintcache
