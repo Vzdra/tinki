@@ -6,7 +6,7 @@ import logo from "../../assets/logo.png";
 const HeaderComp = (props) => {
     if(props.accType == null){
         return(
-            <Menu inverted>
+            <Menu stackable>
                 <MenuItem>
                     <div className="ui mini image">
                         <img src={logo}/>
@@ -29,7 +29,7 @@ const HeaderComp = (props) => {
     }else{
         if(props.accType==="COMPANY"){
             return(
-                <Menu inverted>
+                <Menu stackable>
                     <MenuItem>
                         <div className="ui mini image">
                             <img src={logo}/>
@@ -51,7 +51,7 @@ const HeaderComp = (props) => {
             );
         }else if(props.accType==="TEAM"){
             return(
-                <Menu inverted>
+                <Menu stackable>
                     <MenuItem>
                         <div className="ui mini image">
                             <img src={logo}/>
@@ -73,7 +73,7 @@ const HeaderComp = (props) => {
             );
         }else if(props.accType==="USER"){
             return(
-                <Menu inverted>
+                <Menu stackable>
                     <MenuItem>
                         <div className="ui mini image">
                             <img src={logo}/>

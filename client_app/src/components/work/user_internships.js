@@ -11,6 +11,7 @@ const UserInternships = (props) =>{
                 <h1>Internships for you!</h1>
                 {props.userProfile.internships.map((item, index) =>{
                     return <Internships
+                        search={true}
                         key={item.id}
                         index={index}
                         item={item}

@@ -12,6 +12,7 @@ const UserJobs = (props) =>{
                     <h1>Jobs for you!</h1>
                     {props.userProfile.jobs.map((item, index) =>{
                         return <Jobs
+                            search={true}
                             key={item.id}
                             index={index}
                             item={item}

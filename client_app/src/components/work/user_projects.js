@@ -11,6 +11,7 @@ const UserProjects = (props) =>{
                     <h1>Projects for you!</h1>
                     {props.userProfile.projects.map((item,index) =>{
                         return <Projects
+                            search={true}
                             key={item.id}
                             index={index}
                             item={item}

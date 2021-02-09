@@ -6,7 +6,7 @@ const Jobs = (props) => {
     return(
         <Segment>
             <Header as="h3">{props.item.title}</Header>
-            {props.item.accountType!=="USER" ? <Button primary as={Link} to={{
+            {!props.search ? <Button primary as={Link} to={{
                 pathname: "/edit/job",
                 state: {
                     index: props.index,

@@ -95,8 +95,8 @@ const Search = (props) => {
                 </Form>
 
                 {formData.items.map((item,index) => {
-                    return (item.skillsTrained && <Internships key={item.id} index={index} item={item} />)
-                        || (<Jobs key={item.id} index={index} item={item} />)
+                    return (item.skillsTrained && <Internships key={item.id} index={index} item={item} search={true}/>)
+                        || (<Jobs key={item.id} index={index} item={item} search={true}/>)
                 })}
             </Container>
         );

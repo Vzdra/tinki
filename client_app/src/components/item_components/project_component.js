@@ -7,7 +7,7 @@ const Projects = (props) => {
     return(
         <Segment>
             <Header as="h3">{props.item.title}</Header>
-            {props.item.type!=="USER" ? <Button primary as={Link} to={{
+            {!props.search ? <Button primary as={Link} to={{
                 pathname: "/edit/project",
                 state: {
                     index: props.index,
