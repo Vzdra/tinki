@@ -1,15 +1,26 @@
 import React from 'react';
-import {Container, Header, Table, Item, Button} from 'semantic-ui-react'
+import {Container, Header, Table, Item, Button, Segment} from 'semantic-ui-react'
 import {Link} from "react-router-dom";
 
 const CompanyProfile = (props) =>{
     return(
         <Container textAlign="left">
-            <Header>Company:</Header>
-            <h3>{props.data.name}</h3>
-            <h2>E-mail: {props.data.email}</h2>
-            <h3>Address: {props.data.address.country} {props.data.address.city} {props.data.address.street}</h3>
-            <Button primary as={Link} to={"/company/edit"}>Edit</Button>
+            <Header as="h1">Welcome!</Header>
+            <Segment.Group>
+                <Segment>
+                    <Header>Company</Header>
+                </Segment>
+                <Segment>
+                    <Header as="h3">Company Name:</Header>
+                    {props.data.name}
+                </Segment>
+                <Segment>
+                    <Header as="h3">Company e-mail:</Header>
+                    {props.data.email}
+                </Segment>
+                <Segment><b>Address: </b> {props.data.address.country}-{props.data.address.city}-{props.data.address.street}</Segment>
+            </Segment.Group>
+            <Button primary as={Link} to={"/team/edit"}>Edit</Button>
         </Container>
     );
 }
