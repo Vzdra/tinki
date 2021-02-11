@@ -6,6 +6,7 @@ import Internships from "../item_components/internship_component";
 const UserInternships = (props) =>{
     if(props.userProfile.type==="USER"){
         if(props.userProfile.email!=null){
+            console.log(props.userProfile.internships);
             return(
                 <Container>
                 <h1>Internships for you!</h1>

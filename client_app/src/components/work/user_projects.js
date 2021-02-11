@@ -6,6 +6,7 @@ import Projects from "../item_components/project_component";
 const UserProjects = (props) =>{
     if(props.userProfile.type==="USER"){
         if(props.userProfile.email!=null){
+            console.log(props.userProfile.projects);
             return(
                 <Container>
                     <h1>Projects for you!</h1>

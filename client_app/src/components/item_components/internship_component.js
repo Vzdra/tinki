@@ -3,8 +3,6 @@ import {Header, List, Segment, Button} from 'semantic-ui-react';
 import {Link} from "react-router-dom";
 
 const Internships = (props) => {
-    console.log(props.item);
-
     return(
         <Segment>
             <Header as="h3">{props.item.title}</Header>

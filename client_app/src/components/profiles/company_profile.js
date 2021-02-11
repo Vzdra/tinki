@@ -20,7 +20,7 @@ const CompanyProfile = (props) =>{
                 </Segment>
                 <Segment><b>Address: </b> {props.data.address.country}-{props.data.address.city}-{props.data.address.street}</Segment>
             </Segment.Group>
-            <Button primary as={Link} to={"/team/edit"}>Edit</Button>
+            <Button primary as={Link} to={"/company/edit"}>Edit</Button>
         </Container>
     );
 }

@@ -7,6 +7,7 @@ import Jobs from '../item_components/job_component';
 const UserJobs = (props) =>{
     if(props.userProfile.type==="USER"){
         if(props.userProfile.email!=null){
+            console.log(props.userProfile.jobs);
             return(
                 <Container textAlign="left">
                     <h1>Jobs for you!</h1>
