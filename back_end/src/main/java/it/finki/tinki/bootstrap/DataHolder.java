@@ -70,15 +70,12 @@ public class DataHolder {
             lista2.add(this.skillRepository.findById(7L).get());
             lista2.add(this.skillRepository.findById(1L).get());
             lista2.add(this.skillRepository.findById(5L).get());
-            lista2.add(this.skillRepository.findById(9L).get());
-            lista2.add(this.skillRepository.findById(6L).get());
 
 
             List<Skill> lista3 = new ArrayList<>();
             lista3.add(this.skillRepository.findById(3L).get());
             lista3.add(this.skillRepository.findById(2L).get());
             lista3.add(this.skillRepository.findById(4L).get());
-            lista3.add(this.skillRepository.findById(7L).get());
 
             List<Long> allSkills = new ArrayList<>();
             lista.forEach(item -> {
@@ -107,8 +104,14 @@ public class DataHolder {
             this.workService.insertInternship("Internship 2", "Opportunity to learn new things!", c.getId() ,5000, allSkills, 3, AccountType.COMPANY);
             this.workService.insertProject("Project 1", "Project that lasts few days!", m.getId() ,5000, skills8, new Date(), AccountType.TEAM);
             this.workService.insertProject("Project 2", "Project that ends soon!", m.getId() ,5000, skills4, new Date(), AccountType.TEAM);
+            this.workService.insertJob("Company Job 3", "Company job 1 requires 3 members!", c.getId() ,12345, allSkills, AccountType.COMPANY);
+            this.workService.insertJob("Company Job 4", "Company job 2 requires 3 members!", ct.getId() ,8901, skills8, AccountType.COMPANY);
+            this.workService.insertInternship("Internship 3", "Opportunity to learn new things!", c.getId() ,5000, skills4, 6, AccountType.COMPANY);
+            this.workService.insertInternship("Internship 4", "Opportunity to learn new things!", c.getId() ,5000, allSkills, 3, AccountType.COMPANY);
+            this.workService.insertProject("Project 3", "Project that lasts few days!", m.getId() ,5000, skills8, new Date(), AccountType.TEAM);
+            this.workService.insertProject("Project 4", "Project that ends soon!", m.getId() ,5000, skills4, new Date(), AccountType.TEAM);
 
-            this.accountService.registerUser("user@user", "user", "Zoki", "Poki", lista3, lista);
+            //this.accountService.registerUser("user@user", "user", "Zoki", "Poki", lista3, lista);
         }
     }
 }
